@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+
+  --color-primary: #475569;
+  --color-accent: #0D9488;
+  --color-disabled: #94A3B8;
+  --color-title: #0F172A;
+  --color-highlight: #0F766E;
+
+  --color-disabled-bg: #E2E8F0;
+  --color-primary-bg: #FFFFFF;
+  --color-secondary-bg: #F8FAFC;
+  --color-active-bg: var(--color-accent);
+  --color-highlight-bg: #CCFBF1;
+
+  --font-sans: "Manrope Variable", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    color: var(--color-primary);
+    background-color: var(--color-primary-bg);
+  }
+}
