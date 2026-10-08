@@ -4,6 +4,7 @@
   --color-*: initial;
 
   --color-primary: #475569;
+  --color-secondary: #FFFFFF;
   --color-accent: #0D9488;
   --color-disabled: #94A3B8;
   --color-title: #0F172A;
@@ -14,6 +15,10 @@
   --color-secondary-bg: #F8FAFC;
   --color-active-bg: var(--color-accent);
   --color-highlight-bg: #CCFBF1;
+  --color-avatar-bg: #5478D9; 
+
+  --color-primary-border: var(--color-disabled-bg);
+  --color-accent-border: var(--color-accent);
 
   --font-sans: "Manrope Variable", system-ui, sans-serif;
 }
