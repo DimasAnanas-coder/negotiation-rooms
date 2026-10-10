@@ -10,7 +10,7 @@ export default function Brand() {
                 alt="Negotiation Rooms Logo"
                 className="w-9 h-9"  
             />
-            <h1 className="text-title font-bold text-[20px] ml-2 text-center font-extrabold">{ServiceName}</h1>
+            <h1 className="text-title text-[20px] ml-2 text-center font-extrabold">{ServiceName}</h1>
         </div>
     )
 }
