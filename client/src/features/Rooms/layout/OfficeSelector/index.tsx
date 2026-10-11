@@ -1,2 +1,2 @@
-import OfficeSelector from "./OfficeSelector";
+import OfficeSelector from './OfficeSelector';
 export default OfficeSelector;

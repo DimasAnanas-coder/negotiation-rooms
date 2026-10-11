@@ -1,4 +1,4 @@
-import Container from "../ui/Container";
+import Container from '../ui/Container';
 
 export default function Footer() {
     return (
@@ -7,5 +7,5 @@ export default function Footer() {
                 <p className="text-center">2026 Negotiation Rooms. My studying project.</p>
             </Container>
         </footer>
-    )
+    );
 }

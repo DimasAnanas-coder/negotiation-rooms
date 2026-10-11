@@ -1,6 +1,6 @@
-import { Navigate, type RouteObject } from 'react-router-dom'
+import { Navigate, type RouteObject } from 'react-router-dom';
 import AppLayout from './components/layout/AppLayout';
-import Rooms from './pages/Rooms'
+import Rooms from './pages/Rooms';
 
 export const routes: RouteObject[] = [
     {
@@ -11,4 +11,4 @@ export const routes: RouteObject[] = [
             { path: 'rooms', element: <Rooms /> },
         ],
     },
-]
+];

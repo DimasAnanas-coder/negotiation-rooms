@@ -1,16 +1,15 @@
-import Container from "../ui/Container";
+import Container from '../ui/Container';
 
-import Brand from "./Brand";
-import NavLink from "./NavLink";
-import UserProfile from "./UserProfile";
+import Brand from './Brand';
+import NavLink from './NavLink';
+import UserProfile from './UserProfile';
 
-import { type NavRoutes } from "./types";
+import { type NavRoutes } from './types';
 
 const routes: NavRoutes = [
-    { to: "/rooms", name: "Переговорные", default: true },
-    { to: "/bookings", name: "Мои бронирования" }
-]
-
+    { to: '/rooms', name: 'Переговорные', default: true },
+    { to: '/bookings', name: 'Мои бронирования' },
+];
 
 export default function Header() {
     return (
@@ -20,7 +19,7 @@ export default function Header() {
                     <Brand />
 
                     <nav className="flex flex-row gap-4 text-[15px] font-medium h-full">
-                        {routes.map((route) => (
+                        {routes.map(route => (
                             <NavLink key={route.to} to={route.to}>
                                 {route.name}
                             </NavLink>
@@ -31,5 +30,5 @@ export default function Header() {
                 </div>
             </Container>
         </header>
-    )
+    );
 }

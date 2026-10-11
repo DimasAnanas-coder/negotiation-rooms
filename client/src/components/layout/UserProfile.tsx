@@ -1,6 +1,6 @@
 export default function UserProfile() {
-    const firstName = "Константин";
-    const lastName = "Кичибеков";
+    const firstName = 'Константин';
+    const lastName = 'Кичибеков';
 
     const userInfo = `${firstName} ${lastName[0]}.`;
     const initials = `${firstName[0]}${lastName[0]}`;

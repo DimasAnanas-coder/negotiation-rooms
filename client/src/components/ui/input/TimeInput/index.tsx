@@ -1,3 +1,2 @@
-import TimeInput from "./TimeInput";
+import TimeInput from './TimeInput';
 export default TimeInput;
- 

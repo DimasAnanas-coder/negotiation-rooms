@@ -3,5 +3,5 @@ export default function Container({ className, children }: { className?: string;
         <div className={`mx-auto px-10 ${className || ''}`}>
             {children}
         </div>
-    )
+    );
 }

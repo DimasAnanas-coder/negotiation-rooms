@@ -1,6 +1,6 @@
-import Container from "../components/ui/Container";
-import FilterBar from "../features/Rooms/layout/FilterBar";
-import OfficeSelector from "../features/Rooms/layout/OfficeSelector";
+import Container from '../components/ui/Container';
+import FilterBar from '../features/Rooms/layout/FilterBar';
+import OfficeSelector from '../features/Rooms/layout/OfficeSelector';
 
 export default function Rooms() {
     return (
@@ -12,5 +12,5 @@ export default function Rooms() {
                 <p className="mt-4 text-lg">This is the Rooms page.</p>
             </Container>
         </>
-    )
+    );
 }

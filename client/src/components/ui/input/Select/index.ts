@@ -1,4 +1,4 @@
-import TimeSelector from "./TimeSelector";
-import CapacitySelector from "./CapacitySelector";
+import TimeSelector from './TimeSelector';
+import CapacitySelector from './CapacitySelector';
 
-export {TimeSelector, CapacitySelector};
+export { TimeSelector, CapacitySelector };

@@ -1,14 +1,14 @@
-import { useState } from "react";
-import ClockIcon from "../../../../assets/icons/clock.svg";
+import { useState } from 'react';
+import ClockIcon from '../../../../assets/icons/clock.svg';
 
-import Field from "../Field";
-import InputWrapper from "../InputWrapper";
+import Field from '../Field';
+import InputWrapper from '../InputWrapper';
 import {
     DEFAULT_TIME_DIGITS,
     formatTimeMask,
     normalizeTimeDigits,
     completeTimeDigits,
-} from "./timeMask";
+} from './timeMask';
 
 export default function TimeInput({ label }: { label?: string }) {
     const [digits, setDigits] = useState<string>(DEFAULT_TIME_DIGITS);
@@ -19,19 +19,19 @@ export default function TimeInput({ label }: { label?: string }) {
 
     // Отдельно обрабатываем удаление символа, чтобы учесть удаление маски
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Backspace") {
+        if (e.key === 'Backspace') {
             e.preventDefault();
-            setDigits((prev) => prev.slice(0, -1));
+            setDigits(prev => prev.slice(0, -1));
         }
     };
 
     // Если пользователь не ввел время до конца, то отстаток маски заполнится в этой функции нулями
     const handleBlur = () => {
-        setDigits((prev) => completeTimeDigits(prev));
+        setDigits(prev => completeTimeDigits(prev));
     };
 
     return (
-        <Field label={label || "ВРЕМЯ НАЧАЛА"}>
+        <Field label={label || 'ВРЕМЯ НАЧАЛА'}>
             <InputWrapper
                 id="Time-input"
                 leftIcon={ClockIcon}
@@ -45,9 +45,9 @@ export default function TimeInput({ label }: { label?: string }) {
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
                     onBlur={handleBlur}
-                    onFocus={(e) => e.target.select()}
+                    onFocus={e => e.target.select()}
                     placeholder="--:--"
-                    className="flex w-14 border-0 text-[14px] text-title focus:outline-none"
+                    className="flex w-10 border-0 text-[14px] text-title focus:outline-none"
                 />
             </InputWrapper>
         </Field>
