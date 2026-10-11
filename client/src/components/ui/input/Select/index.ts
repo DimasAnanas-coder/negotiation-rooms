@@ -1,2 +1,4 @@
-import Select from "./Select";
-export default Select;
+import TimeSelector from "./TimeSelector";
+import CapacitySelector from "./CapacitySelector";
+
+export {TimeSelector, CapacitySelector};
