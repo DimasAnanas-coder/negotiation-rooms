@@ -18,7 +18,7 @@ export default defineConfig([
       stylistic.configs.customize({
         indent: 4,
         quotes: 'single',
-        semi: false,
+        semi: true,
         jsx: true,
       }),
     ],
