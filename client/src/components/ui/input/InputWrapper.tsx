@@ -5,7 +5,8 @@ interface InputWrapperArgs {
     id: String;
     leftIcon?: string;
     rightIcon?: string
-    label: String
+    label?: String
+    isDropdown?: boolean;
     children: ReactNode;
 };
 
@@ -16,14 +17,17 @@ export default function InputWrapper({
     leftIcon,
     rightIcon,
     label,
-    children
+    isDropdown=true,
+    children,
 }: InputWrapperArgs) {
     const { openId, toggle, close } = useDropdown();
     const isOpen = openId === id;
 
     const intoButton = [
         leftIcon && <img src={leftIcon} className="w-4 h-4"/>,
-        <p className="text-[14px]"> {label} </p>,
+        isDropdown 
+            ? <p className="text-[14px] text-title"> {label || ""} </p>
+            : children,
         rightIcon && <img src={rightIcon} className="w-4 h-4"/>,
     ]
 
@@ -35,8 +39,8 @@ export default function InputWrapper({
             >
                 {...intoButton}
             </button>
-
-            {isOpen ? 
+        
+            {isOpen && isDropdown ? 
                 <>
                     <div 
                         className="fixed inset-0 z-20"
