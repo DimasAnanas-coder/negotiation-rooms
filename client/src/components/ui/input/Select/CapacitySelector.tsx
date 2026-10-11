@@ -32,6 +32,7 @@ export default function CapacitySelector() {
             label="ВМЕСТИМОСТЬ"
         >
             <Select
+                id="Capacity-selector"
                 leftIcon={UsersIcon}
                 activeListItemId={activeUserCapacityId}
                 label={`Мин. ${findCapacity(activeUserCapacityId).usersCount} чел.`}

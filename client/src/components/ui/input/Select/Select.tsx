@@ -6,6 +6,7 @@ import ChevronDown from "../../../../assets/icons/chevron-down.svg";
 
 
 interface SelectArgs {
+    id: String;
     leftIcon?: string;
     rightIcon?: string;
     onSelect: (id: Number) => void;
@@ -15,6 +16,7 @@ interface SelectArgs {
 }
 
 export default function Select({
+    id,
     leftIcon,
     rightIcon,
     onSelect,
@@ -24,6 +26,7 @@ export default function Select({
 }: SelectArgs) {
     return (
         <InputWrapper
+            id={id}
             leftIcon={leftIcon}
             rightIcon={rightIcon || ChevronDown}
             label={label || activeListItemId.toString()}

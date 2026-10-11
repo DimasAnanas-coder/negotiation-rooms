@@ -29,7 +29,8 @@ export default function TimeSelector ({label}: {label?: String}) {
         <Field
             label={label || "ДЛИТЕЛЬНОСТЬ"}
         >
-            <Select 
+            <Select
+                id={"Time-selector"}
                 onSelect={setActiveTimeId}
                 label={findTime(activeTimeId).value}
                 list={TIMES}

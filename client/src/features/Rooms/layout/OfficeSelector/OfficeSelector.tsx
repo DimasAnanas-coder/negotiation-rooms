@@ -10,7 +10,7 @@ export default function OfficeSelector() {
 
     return (
         <Container className="border-b border-primary-border">
-            <div className="flex flex-col h-full w-full items-start py-6 gap-1">
+            <div className="flex flex-col h-full w-full items-start py-4 gap-1">
                 <SelectorTrigger 
                     officeName={office.name}
                 />

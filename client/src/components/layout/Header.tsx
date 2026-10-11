@@ -14,7 +14,7 @@ const routes: NavRoutes = [
 
 export default function Header() {
     return (
-        <header className="h-20 flex items-center border-b border-primary-border">
+        <header className="h-18 flex items-center border-b border-primary-border">
             <Container className="w-full h-full">
                 <div className="flex justify-between items-center h-full">
                     <Brand />
