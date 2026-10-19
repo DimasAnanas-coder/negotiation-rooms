@@ -26,9 +26,7 @@ export default function InputWrapper({
         isDropdown
             ? (
                     <p className="text-[14px] text-title">
-                        {' '}
                         {label || ''}
-                        {' '}
                     </p>
                 )
             : children,
