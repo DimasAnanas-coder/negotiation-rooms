@@ -16,6 +16,7 @@
   --color-active-bg: var(--color-accent);
   --color-highlight-bg: #CCFBF1;
   --color-avatar-bg: #5478D9; 
+  --color-skeleton-bg: #EDEDED;
 
   --color-primary-border: var(--color-disabled-bg);
   --color-accent-border: var(--color-accent);
