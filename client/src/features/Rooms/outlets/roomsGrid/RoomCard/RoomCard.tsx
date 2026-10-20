@@ -33,10 +33,7 @@ export default function RoomCard({
                 <div className="flex flex-row gap-2">
                     <img src={UsersIcon} />
                     <p>
-                        Вместимость: до
-                        {room.capacity}
-                        {' '}
-                        человек
+                        {`Вместимость: до ${room.capacity} человек`}
                     </p>
                 </div>
 

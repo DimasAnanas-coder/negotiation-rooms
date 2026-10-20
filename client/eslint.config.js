@@ -22,6 +22,9 @@ export default defineConfig([
         jsx: true,
       }),
     ],
+    rules: {
+      '@stylistic/jsx-one-expression-per-line': 'off',
+    },
     plugins: {
       '@stylistic': stylistic,
     },
