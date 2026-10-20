@@ -15,8 +15,8 @@ export default function RoomsGrid() {
                 {
                     rooms.map((room: Room | undefined): ReactNode => {
                         return (
-                            <RoomCard
-                                key={room?.id}
+                            room && <RoomCard
+                                key={room.id}
                                 roomStatus={loading == 'loading' ? 'loading' : 'available'}
                                 room={room}
                             />

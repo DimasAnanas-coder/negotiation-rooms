@@ -1,5 +1,6 @@
 import { BrowserRouter, useRoutes } from 'react-router-dom';
 import { routes } from './routes';
+import { DropdownProvider } from './context/DropdownContext';
 
 function AppRoutes() {
     const element = useRoutes(routes);
@@ -9,7 +10,9 @@ function AppRoutes() {
 export default function App() {
     return (
         <BrowserRouter>
-            <AppRoutes />
+            <DropdownProvider>
+                <AppRoutes />
+            </DropdownProvider>
         </BrowserRouter>
     );
 }

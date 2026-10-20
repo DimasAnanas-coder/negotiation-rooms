@@ -1,17 +1,17 @@
-import { type ListItem } from './types';
+import { type ListItem, type ListItemId } from './types';
 import CheckIcon from '../../../../assets/icons/check.svg';
 
-interface SelectItemArgs {
-    onSelect: (id: number) => void;
-    listItem: ListItem;
+interface SelectItemArgs<T extends ListItemId = number> {
+    onSelect: (id: T) => void;
+    listItem: ListItem<T>;
     isActive: boolean;
 }
 
-export default function SelectItem({
+export default function SelectItem<T extends ListItemId>({
     onSelect,
     listItem,
     isActive,
-}: SelectItemArgs) {
+}: SelectItemArgs<T>) {
     return (
         <button
             className={
