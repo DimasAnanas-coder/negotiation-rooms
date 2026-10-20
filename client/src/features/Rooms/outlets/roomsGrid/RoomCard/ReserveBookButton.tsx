@@ -9,7 +9,7 @@ export default function ReserveBookButton({
 
     return (
         <button
-            className={`flex items-center justify-center py-2.5 px-4 ${className} rounded-lg`}
+            className={`flex items-center cursor-pointer justify-center py-2.5 px-4 ${className} rounded-lg`}
             onClick={handleReserve}
         >
             <p className="font-semibold text-sm">Забронировать</p>

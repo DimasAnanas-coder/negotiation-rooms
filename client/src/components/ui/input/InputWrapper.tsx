@@ -38,10 +38,11 @@ export default function InputWrapper({
         rightIcon && <img src={rightIcon} className="w-4 h-4" />,
     ];
 
+    const pointerSettings = isDropdown ? "cursor-pointer" : "";
     const baseClassName = "flex flex-row items-center z-30 justify-center py-2.5 gap-2 rounded-md w-fit bg-primary-bg";
     const inlineSettings = isInline ? "" : "px-3.5";
     const borderSettings = isBorder ? "border border-primary-border" : "";
-    const resultClassName = `${baseClassName} ${borderSettings} ${inlineSettings}`;
+    const resultClassName = `${baseClassName} ${borderSettings} ${inlineSettings} ${pointerSettings}`;
 
     return (
         <div className="flex flex-col relative">

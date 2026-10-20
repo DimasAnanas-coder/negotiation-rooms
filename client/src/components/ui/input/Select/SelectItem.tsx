@@ -15,7 +15,7 @@ export default function SelectItem<T extends ListItemId>({
     return (
         <button
             className={
-                `flex rounded-md justify-between items-center text-title px-3 py-2 ${isActive ? 'bg-highlight-bg' : ''}`
+                `flex rounded-md justify-between items-center text-title px-3 py-2 ${isActive ? 'bg-highlight-bg' : ''} cursor-pointer`
             }
             onClick={() => onSelect(listItem.id)}
         >
