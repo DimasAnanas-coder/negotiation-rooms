@@ -5,4 +5,4 @@ export interface Room {
     capacity: number;
 };
 
-export type RoomsStatus = "loading" | "loaded";
+export type RoomsStatus = 'loading' | 'loaded';

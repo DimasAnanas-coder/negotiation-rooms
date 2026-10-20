@@ -1,2 +1,2 @@
-import RoomsGrid from "./RoomsGrid";
+import RoomsGrid from './RoomsGrid';
 export default RoomsGrid;

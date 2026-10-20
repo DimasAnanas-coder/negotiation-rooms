@@ -1,2 +1,2 @@
-import RoomCard from "./RoomCard";
+import RoomCard from './RoomCard';
 export default RoomCard;

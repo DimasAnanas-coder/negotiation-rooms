@@ -1,14 +1,15 @@
-import Skeleton from "../../../../../components/ui/Skeleton";
-import RoomCardWrapper from "./RoomCardWrapper";
+import Skeleton from '../../../../../components/ui/Skeleton';
+import RoomCardWrapper from './RoomCardWrapper';
 
+export default function RoomCardSkeleton() {
+    const lineWithCircle = (
+        <div className="flex flex-row gap-2">
+            <Skeleton width={16} height={16} variant="circle" />
+            <Skeleton width={200} height={16} />
+        </div>
+    );
 
-export default function RoomCardSkeleton(){
-    const lineWithCircle = <div className="flex flex-row gap-2">
-        <Skeleton width={16} height={16} variant="circle"/>
-        <Skeleton width={200} height={16} />
-    </div>
-
-    const rect = <Skeleton width="100%" height={36}/>;
+    const rect = <Skeleton width="100%" height={36} />;
 
     return (
         <RoomCardWrapper>

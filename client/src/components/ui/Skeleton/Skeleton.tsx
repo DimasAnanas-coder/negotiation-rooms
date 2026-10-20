@@ -9,7 +9,7 @@ interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantClasses: Record<SkeletonVariant, string> = {
-    rect:   'rounded-md',
+    rect: 'rounded-md',
     circle: 'rounded-full',
 };
 
