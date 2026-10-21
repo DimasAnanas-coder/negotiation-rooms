@@ -13,10 +13,10 @@ export default function RoomsGrid() {
             </p>
             <div className="grid grid-cols-3 gap-6">
                 {
-                    rooms.map((room: Room | undefined): ReactNode => {
+                    rooms.map((room: Room | undefined, index: number): ReactNode => {
                         return (
-                            room && <RoomCard
-                                key={room.id}
+                            <RoomCard
+                                key={index}
                                 roomStatus={loading == 'loading' ? 'loading' : 'available'}
                                 room={room}
                             />
