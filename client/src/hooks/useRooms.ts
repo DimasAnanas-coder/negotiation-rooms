@@ -1,62 +1,21 @@
-import { useEffect, useState, useCallback } from 'react';
-import axios from 'axios';
-import type { Room, RoomsStatus } from '../types/Rooms';
+import { useCallback } from 'react';
+import { getRooms } from '../api/rooms';
+import type { Room } from '../types/Rooms';
+import useApi from './useApi';
 
-interface RoomsResponse {
-    items: Array<{
-        id: string;
-        name: string;
-        floor: number;
-        capacity: number;
-    }>;
-}
+const EMPTY_ROOMS: Room[] = [];
 
-async function fetchRooms(): Promise<Array<Room>> {
-    const response = await axios.get<RoomsResponse>(
-        'http://localhost:3000/api/v1/rooms', {
-            params: { officeId: 'office-moscow' },
-        },
+export default function useRooms(officeId: string | null) {
+    const loadRooms = useCallback(() => {
+        if (!officeId) return Promise.resolve(EMPTY_ROOMS);
+        return getRooms(officeId);
+    }, [officeId]);
+
+    const { data, status, error, refetch } = useApi(
+        loadRooms,
+        officeId !== null,
+        EMPTY_ROOMS,
     );
-    console.log(response.data);
 
-    return response.data.items.map((data) => {
-        return {
-            id: data.id,
-            name: data.name,
-            floor: data.floor,
-            capacity: data.capacity,
-        };
-    });
-}
-
-const DEFAULT_ROOMS_BEFORE_LOADING: Array<Room | undefined> = [
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-];
-
-export default function useRooms() {
-    const [rooms, setRooms] = useState<Array<Room | undefined>>(DEFAULT_ROOMS_BEFORE_LOADING);
-    const [loading, setLoading] = useState<RoomsStatus>('loading');
-
-    const refetch = useCallback(() => {
-        setLoading('loading'); 
-        
-        fetchRooms()
-            .then((data) => {
-                setRooms(data);
-                setLoading('loaded');
-            })
-            .catch((error) => {
-                console.error("Ошибка загрузки комнат:", error);
-                setLoading('error'); 
-            });
-    }, []);
-
-    useEffect(() => {
-        refetch();
-    }, [refetch]);
-
-    return { rooms, setRooms, loading, refetch };
+    return { rooms: data, status, error, refetch };
 }

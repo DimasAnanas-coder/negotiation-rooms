@@ -43,12 +43,14 @@ export default function BaseState({
                     {description}
                 </p>
             </div>
-            <button
-                className='flex px-6 py-3 bg-active-bg rounded-xl cursor-pointer'
-                onClick={onClick}
-            >
-                <p className='text-secondary text-sm font-bold'>{buttonLabel}</p>
-            </button>
+            {buttonLabel && onClick && (
+                <button
+                    className='flex px-6 py-3 bg-active-bg rounded-xl cursor-pointer'
+                    onClick={onClick}
+                >
+                    <p className='text-secondary text-sm font-bold'>{buttonLabel}</p>
+                </button>
+            )}
         </div>
     );
 }

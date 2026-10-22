@@ -1,27 +1,27 @@
-import type { ReactNode } from 'react';
 import useRooms from '../../../../hooks/useRooms';
 import RoomCard from './RoomCard';
 import Container from '../../../../components/ui/Container';
-import type { Room } from '../../../../types/Rooms';
 import ErrorLoadingState from '../../states/ErrorLoadingState';
 import NotFoundRoomsState from '../../states/NotFoundRoomsState';
+import OfficeNotSelectedState from '../../states/OfficeNotSelectedState';
 
-export default function RoomsGrid() {
-    // TODO: сделать выбор офиса из нового хука useOffice. Полученный офис передавать в хук useRooms, 
-    // чтобы получать комнаты именно от него, и добавить проверку офис ли это или пункт "не выбрано", 
-    // если так, то показывать OfficeNotSelectedState
-    const { rooms, loading, refetch } = useRooms();
+const LOADING_SKELETON_ROOMS = Array.from({ length: 4 }, () => undefined);
 
-    if (loading == 'error'){
+
+export default function RoomsGrid({ officeId }: { officeId: string | null }) {
+    const { rooms, status, refetch } = useRooms(officeId);
+
+    if (status === 'error') {
         return (
-            <div className='flex '>
-                <ErrorLoadingState
-                    onClick={refetch}
-                />
+            <div className="flex">
+                <ErrorLoadingState onClick={refetch} />
             </div>
-        )
+        );
     }
-    if (rooms.length == 0) {
+
+    if (!officeId) return <OfficeNotSelectedState />;
+
+    if (status === 'loaded' && rooms.length === 0) {
         return (
             <NotFoundRoomsState
                 onClick={() => {}} // TODO: добавить сюда пробрасывание функции для очистки параметров 
@@ -29,23 +29,23 @@ export default function RoomsGrid() {
         )
     }
 
+    const visibleRooms = status === 'loading'
+        ? LOADING_SKELETON_ROOMS
+        : rooms;
+
     return (
         <Container className="flex flex-col bg-secondary-bg px-10 py-4 gap-4">
             <p className="text-[22px] font-extrabold text-title">
-                {loading == 'loading' ? 'Загрузка переговорных...' : 'Доступные переговорные в этом офисе'}
+                {status === 'loading' ? 'Загрузка переговорных…' : 'Доступные переговорные в этом офисе'}
             </p>
             <div className="grid grid-cols-3 gap-6">
-                {
-                    rooms.map((room: Room | undefined, index: number): ReactNode => {
-                        return (
-                            <RoomCard
-                                key={index}
-                                roomStatus={loading == 'loading' ? 'loading' : 'available'}
-                                room={room}
-                            />
-                        );
-                    })
-                }
+                {visibleRooms.map((room, index) => (
+                    <RoomCard
+                        key={room?.id ?? `skeleton-${index}`}
+                        roomStatus={status === 'loading' ? 'loading' : 'available'}
+                        room={room}
+                    />
+                ))}
             </div>
         </Container>
     );

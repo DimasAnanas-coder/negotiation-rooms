@@ -1,8 +1,10 @@
 export interface Room {
     id: string;
+    officeId: string;
     name: string;
     floor: number;
     capacity: number;
+    features: Array<{ code: string; name: string }>;
 };
 
-export type RoomsStatus = 'loading' | 'loaded' | 'error';
+export type { RequestStatus as RoomsStatus } from './RequestStatus';
