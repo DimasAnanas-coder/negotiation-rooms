@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import type { Room, RoomsStatus } from '../types/Rooms';
 
@@ -40,12 +40,23 @@ export default function useRooms() {
     const [rooms, setRooms] = useState<Array<Room | undefined>>(DEFAULT_ROOMS_BEFORE_LOADING);
     const [loading, setLoading] = useState<RoomsStatus>('loading');
 
-    useEffect(() => {
-        fetchRooms().then((data) => {
-            setRooms(data);
-            setLoading('loaded');
-        });
+    const refetch = useCallback(() => {
+        setLoading('loading'); 
+        
+        fetchRooms()
+            .then((data) => {
+                setRooms(data);
+                setLoading('loaded');
+            })
+            .catch((error) => {
+                console.error("Ошибка загрузки комнат:", error);
+                setLoading('error'); 
+            });
     }, []);
 
-    return { rooms, setRooms, loading };
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
+
+    return { rooms, setRooms, loading, refetch };
 }
