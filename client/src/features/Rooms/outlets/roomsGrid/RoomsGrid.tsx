@@ -1,20 +1,38 @@
 import useRooms from '../../../../hooks/useRooms';
 import RoomCard from './RoomCard';
 import Container from '../../../../components/ui/Container';
-import ErrorLoadingState from '../../states/ErrorLoadingState';
+import ErrorRoomsState from '../../states/ErrorRoomsState';
 import NotFoundRoomsState from '../../states/NotFoundRoomsState';
 import OfficeNotSelectedState from '../../states/OfficeNotSelectedState';
+import type { RequestStatus } from '../../../../types/RequestStatus';
+import ErrorOfficesState from '../../states/ErrorOfficesState';
 
 const LOADING_SKELETON_ROOMS = Array.from({ length: 4 }, () => undefined);
 
+interface RoomsGridAtgs { 
+    officeId: string | null;
+    officeStatus: RequestStatus;
+    refetchOffices: () => void;
+}
 
-export default function RoomsGrid({ officeId }: { officeId: string | null }) {
+export default function RoomsGrid({ 
+    officeId, 
+    officeStatus,
+    refetchOffices, 
+}: RoomsGridAtgs) {
+    if (officeStatus === 'error') {
+        return (
+            <div className="flex">
+                <ErrorOfficesState onClick={refetchOffices} />
+            </div>
+        );
+    }
+
     const { rooms, status, refetch } = useRooms(officeId);
-
     if (status === 'error') {
         return (
             <div className="flex">
-                <ErrorLoadingState onClick={refetch} />
+                <ErrorRoomsState onClick={refetch} />
             </div>
         );
     }
