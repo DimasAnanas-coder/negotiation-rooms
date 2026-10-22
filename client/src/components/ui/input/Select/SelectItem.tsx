@@ -1,5 +1,6 @@
 import { type ListItem, type ListItemId } from './types';
 import CheckIcon from '../../../../assets/icons/check.svg';
+import Button from '../../Button';
 
 interface SelectItemArgs<T extends ListItemId = number> {
     onSelect: (id: T) => void;
@@ -13,21 +14,24 @@ export default function SelectItem<T extends ListItemId>({
     isActive,
 }: SelectItemArgs<T>) {
     return (
-        <button
-            className={
-                `flex rounded-md justify-between items-center text-title px-3 py-2 ${isActive ? 'bg-highlight-bg' : ''} cursor-pointer`
-            }
+        <Button
+            variant="ghost"
+            size="sm"
+            weight="normal"
+            isSelected={isActive}
+            className="w-full justify-between! text-[14px]"
             onClick={() => onSelect(listItem.id)}
         >
-            <p className="text-[14px]">{listItem.value}</p>
+            <span>{listItem.value}</span>
             {isActive
                 ? (
                         <img
+                            alt="Выбрано"
                             src={CheckIcon}
                             className="w-3 h-2.25"
                         />
                     )
                 : ''}
-        </button>
+        </Button>
     );
 }

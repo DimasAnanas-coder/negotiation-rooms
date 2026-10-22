@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import { useDropdown } from '../../../context/DropdownContext';
+import Button from '../Button';
 
 interface InputWrapperArgs {
     id: string;
@@ -42,26 +43,25 @@ export default function InputWrapper({
         rightIcon && <img src={rightIcon} className="w-4 h-4" />,
     ];
 
-    const pointerSettings = !isActive
-        ? "cursor-not-allowed"
-        : isDropdown
-            ? "cursor-pointer"
-            : "";
-    const baseClassName = "flex flex-row items-center z-30 justify-center gap-2 rounded-md w-fit bg-primary-bg";
-    const inlineSettings = isInline ? "" : "px-3.5 py-2.5";
-    const borderSettings = isBorder ? "border border-primary-border" : "";
-    const resultClassName = `${baseClassName} ${borderSettings} ${inlineSettings} ${pointerSettings}`;
     const handleButtonClick = isActive ? () => toggle(id) : () => {};
+    const wrapperClassName = [
+        'z-30 w-fit flex-row rounded-md bg-primary-bg',
+        isBorder ? '' : '!border-0',
+        isInline ? '!px-0 !py-0' : '',
+    ].filter(Boolean).join(' ');
 
     return (
         <div className="flex flex-col relative">
-            <button
-                className={resultClassName}
+            <Button
+                variant="secondary"
+                className={wrapperClassName}
                 onClick={handleButtonClick}
+                disabled={!isActive}
                 title={!isActive ? inactiveMessage : undefined}
+                weight="normal"
             >
                 {...intoButton}
-            </button>
+            </Button>
 
             {isOpen && isDropdown
                 ? (

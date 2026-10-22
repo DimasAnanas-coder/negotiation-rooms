@@ -1,4 +1,5 @@
 import AlertTriangleIcon from '../../../assets/icons/alert-triangle.svg';
+import Button from '../../ui/Button';
 
 
 type Color = "gray" | "accent" | "red";
@@ -44,12 +45,13 @@ export default function BaseState({
                 </p>
             </div>
             {buttonLabel && onClick && (
-                <button
-                    className='flex px-6 py-3 bg-active-bg rounded-xl cursor-pointer'
+                <Button
+                    variant="primary"
+                    size="lg"
                     onClick={onClick}
                 >
-                    <p className='text-secondary text-sm font-bold'>{buttonLabel}</p>
-                </button>
+                    {buttonLabel}
+                </Button>
             )}
         </div>
     );
