@@ -6,5 +6,3 @@ export interface Room {
     capacity: number;
     features: Array<{ code: string; name: string }>;
 };
-
-export type { RequestStatus as RoomsStatus } from './RequestStatus';
