@@ -35,6 +35,8 @@ export default function Select<T extends ListItemId>({
             rightIcon={rightIcon || ChevronDown}
             isBorder={isBorder}
             isInline={isInline}
+            isActive={list.length > 0}
+            inactiveMessage="Нет доступных вариантов"
             label={label || activeListItemId.toString()}
         >
             <div className="flex flex-col gap-1 p-2">

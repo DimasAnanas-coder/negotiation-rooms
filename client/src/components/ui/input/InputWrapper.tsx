@@ -9,6 +9,8 @@ interface InputWrapperArgs {
     isDropdown?: boolean;
     isBorder?: boolean;
     isInline?: boolean;
+    isActive?: boolean;
+    inactiveMessage?: string;
     children: ReactNode;
 };
 
@@ -20,6 +22,8 @@ export default function InputWrapper({
     isDropdown = true,
     isBorder = true,
     isInline = false,
+    isActive = true,
+    inactiveMessage,
     children,
 }: InputWrapperArgs) {
     const { openId, toggle, close } = useDropdown();
@@ -38,17 +42,23 @@ export default function InputWrapper({
         rightIcon && <img src={rightIcon} className="w-4 h-4" />,
     ];
 
-    const pointerSettings = isDropdown ? "cursor-pointer" : "";
+    const pointerSettings = !isActive
+        ? "cursor-not-allowed"
+        : isDropdown
+            ? "cursor-pointer"
+            : "";
     const baseClassName = "flex flex-row items-center z-30 justify-center gap-2 rounded-md w-fit bg-primary-bg";
     const inlineSettings = isInline ? "" : "px-3.5 py-2.5";
     const borderSettings = isBorder ? "border border-primary-border" : "";
     const resultClassName = `${baseClassName} ${borderSettings} ${inlineSettings} ${pointerSettings}`;
+    const handleButtonClick = isActive ? () => toggle(id) : () => {};
 
     return (
         <div className="flex flex-col relative">
             <button
                 className={resultClassName}
-                onClick={() => toggle(id)}
+                onClick={handleButtonClick}
+                title={!isActive ? inactiveMessage : undefined}
             >
                 {...intoButton}
             </button>
