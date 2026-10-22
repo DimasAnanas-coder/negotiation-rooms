@@ -39,8 +39,8 @@ export default function InputWrapper({
     ];
 
     const pointerSettings = isDropdown ? "cursor-pointer" : "";
-    const baseClassName = "flex flex-row items-center z-30 justify-center py-2.5 gap-2 rounded-md w-fit bg-primary-bg";
-    const inlineSettings = isInline ? "" : "px-3.5";
+    const baseClassName = "flex flex-row items-center z-30 justify-center gap-2 rounded-md w-fit bg-primary-bg";
+    const inlineSettings = isInline ? "" : "px-3.5 py-2.5";
     const borderSettings = isBorder ? "border border-primary-border" : "";
     const resultClassName = `${baseClassName} ${borderSettings} ${inlineSettings} ${pointerSettings}`;
 
