@@ -45,7 +45,7 @@ export default function OfficeSelector() {
 
     return (
         <Container className="border-b border-primary-border">
-            <div className="flex flex-col h-full w-full items-start py-4 gap-1">
+            <div className="flex flex-col h-full w-full items-start py-3 gap-1">
                 <Select<string>
                     id="office-select"
                     label={`Офис ${selectedOffice.name}`}
