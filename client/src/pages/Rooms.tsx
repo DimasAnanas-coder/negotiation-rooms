@@ -2,12 +2,13 @@ import { useState, type ReactNode } from 'react';
 import FilterBar from '../features/Rooms/layout/FilterBar';
 import OfficeSelector from '../features/Rooms/layout/OfficeSelector';
 import RoomsGrid from '../features/Rooms/outlets/roomsGrid';
-import ErrorOfficesState from '../features/Rooms/states/ErrorOfficesState';
-import ErrorRoomsState from '../features/Rooms/states/ErrorRoomsState';
-import NotFoundRoomsState from '../features/Rooms/states/NotFoundRoomsState';
-import OfficeNotSelectedState from '../features/Rooms/states/OfficeNotSelectedState';
-import useOffices from '../hooks/useOffices';
-import useRooms from '../hooks/useRooms';
+import {
+    ErrorOfficesState,
+    ErrorRoomsState,
+    NotFoundRoomsState,
+    OfficeNotSelectedState,
+} from '../features/Rooms/states';
+import { useOffices, useRooms } from '../hooks';
 
 export default function Rooms() {
     const { offices, status: officesStatus, refetch: refetchOffices } = useOffices();
