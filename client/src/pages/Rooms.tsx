@@ -21,7 +21,7 @@ export default function Rooms() {
     let roomsContent: ReactNode;
 
     if (officesStatus === 'loading') {
-        roomsContent = null;
+        roomsContent = <RoomsGrid rooms={rooms} status="loading" />;;
     } else if (officesStatus === 'error') {
         roomsContent = <ErrorOfficesState onClick={refetchOffices} />;
     } else if (!selectedOfficeId) {
