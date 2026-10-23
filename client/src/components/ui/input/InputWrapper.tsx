@@ -12,6 +12,8 @@ interface InputWrapperArgs {
     isInline?: boolean;
     isActive?: boolean;
     inactiveMessage?: string;
+    triggerClassName?: string;
+    dropdownClassName?: string;
     children: ReactNode;
 };
 
@@ -25,6 +27,8 @@ export default function InputWrapper({
     isInline = false,
     isActive = true,
     inactiveMessage,
+    triggerClassName = '',
+    dropdownClassName = '',
     children,
 }: InputWrapperArgs) {
     const { openId, toggle, close } = useDropdown();
@@ -48,6 +52,7 @@ export default function InputWrapper({
         'z-30 w-fit flex-row rounded-md bg-primary-bg',
         isBorder ? '' : '!border-0',
         isInline ? '!px-0 !py-0' : '',
+        triggerClassName,
     ].filter(Boolean).join(' ');
 
     return (
@@ -70,7 +75,7 @@ export default function InputWrapper({
                                 className="fixed inset-0 z-20"
                                 onClick={close}
                             />
-                            <div className="border border-primary-border absolute top-full mt-1.5 z-40 rounded-xl min-w-45 bg-primary-bg">
+                            <div className={`border border-primary-border absolute top-full mt-1.5 z-40 rounded-xl min-w-45 bg-primary-bg ${dropdownClassName}`}>
                                 {children}
                             </div>
                         </>
