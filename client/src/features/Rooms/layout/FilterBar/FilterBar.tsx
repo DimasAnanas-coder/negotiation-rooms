@@ -1,6 +1,5 @@
 import Container from '../../../../components/ui/Container';
-import CalendarSelector from '../../../../components/ui/input/CalendarSelector';
-import { CapacitySelector, TimeSelector } from '../../../../components/ui/input/Select';
+import { CalendarSelector, CapacitySelector, TimeSelector } from '../../../../components/ui/input/selectors';
 import TimeInput from '../../../../components/ui/input/TimeInput';
 
 export default function FilterBar() {

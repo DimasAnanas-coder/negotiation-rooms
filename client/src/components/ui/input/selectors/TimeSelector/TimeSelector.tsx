@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Select from './Select';
-import Field from '../Field';
+import Select from '../Select';
+import Field from '../../Field';
 
 interface Time {
     id: number;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import UsersIcon from '../../../../assets/icons/users.svg';
+import UsersIcon from '../../../../../assets/icons/users.svg';
 
-import Field from '../Field';
-import Select from './Select';
+import Field from '../../Field';
+import Select from '../Select';
 
 interface UserCapacity {
     id: number;

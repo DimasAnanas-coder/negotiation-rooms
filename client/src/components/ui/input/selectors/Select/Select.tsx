@@ -1,8 +1,8 @@
-import InputWrapper from '../InputWrapper';
+import InputWrapper from '../../InputWrapper';
 import SelectItem from './SelectItem';
 import { type ListItem, type ListItemId } from './types';
 
-import ChevronDown from '../../../../assets/icons/chevron-down.svg';
+import ChevronDown from '../../../../../assets/icons/chevron-down.svg';
 import type { ReactNode } from 'react';
 
 interface SelectArgs<T extends ListItemId = number> {

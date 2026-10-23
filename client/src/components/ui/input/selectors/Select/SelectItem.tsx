@@ -1,6 +1,6 @@
 import { type ListItem, type ListItemId } from './types';
-import CheckIcon from '../../../../assets/icons/check.svg';
-import Button from '../../Button';
+import CheckIcon from '../../../../../assets/icons/check.svg';
+import Button from '../../../Button';
 
 interface SelectItemArgs<T extends ListItemId = number> {
     onSelect: (id: T) => void;

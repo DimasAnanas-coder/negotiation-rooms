@@ -1,5 +1,5 @@
 import Container from '../../../../components/ui/Container';
-import Select from '../../../../components/ui/input/Select/Select';
+import { Select } from '../../../../components/ui/input/selectors';
 import type { Office } from '../../../../types/Office';
 import { getLocalTime } from '../../../../utils/getLocalTime';
 
