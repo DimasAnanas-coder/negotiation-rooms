@@ -5,17 +5,28 @@ interface BaseStateArgs {
     title: string;
     description?: string;
     children?: ReactNode;
+    layout?: 'content' | 'page';
 }
 
-export default function BaseState({ visual, title, description, children }: BaseStateArgs) {
+export default function BaseState({
+    visual,
+    title,
+    description,
+    children,
+    layout = 'content',
+}: BaseStateArgs) {
+    const layoutClassName = layout === 'page'
+        ? 'min-h-full justify-center bg-secondary-bg px-6 py-[120px]'
+        : 'mt-20 h-full';
+
     return (
-        <div className="flex flex-col items-center mt-20 gap-6 w-full h-full">
+        <div className={`flex w-full flex-col items-center gap-6 ${layoutClassName}`}>
             {visual}
             <div className='flex gap-3 flex-col items-center'>
                 <p className='text-title font-extrabold text-xl'>
                     {title}
                 </p>
-                {description && <p className='text-sm'>{description}</p>}
+                {description && <p className='max-w-sm text-center text-sm'>{description}</p>}
             </div>
             {children}
         </div>
