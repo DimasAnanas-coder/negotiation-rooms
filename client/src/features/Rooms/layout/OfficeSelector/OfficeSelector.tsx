@@ -3,6 +3,8 @@ import { Select } from '../../../../components/ui/input/selectors';
 import type { Office } from '../../../../types/Office';
 import { getLocalTime } from '../../../../utils/getLocalTime';
 
+const NOT_SELECTED_OFFICE_ID = 'not-selected';
+
 interface OfficeSelectorArgs {
     offices: Office[];
     selectedOfficeId: string | null;
@@ -23,7 +25,7 @@ export default function OfficeSelector({
                     id="office-select"
                     label={selectedOffice ? `${selectedOffice.name}` : 'Выберите офис'}
                     onSelect={onOfficeChange}
-                    activeListItemId={selectedOfficeId ?? ''}
+                    activeListItemId={selectedOfficeId ?? NOT_SELECTED_OFFICE_ID}
                     isBorder={false}
                     isInline
                     list={offices.map((office) => ({ id: office.id, value: office.name }))}

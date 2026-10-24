@@ -25,7 +25,7 @@ export default function Rooms() {
     const [filters, setFilters] = useState<RoomFilterValues>(EMPTY_ROOM_FILTERS);
     const selectedOfficeId = offices.some((office) => office.id === requestedOfficeId)
         ? requestedOfficeId
-        : offices[0]?.id ?? null;
+        : null;
     const roomsQuery = useMemo<RoomsQuery>(() => {
         const query: RoomsQuery = {};
         if (filters.minCapacity !== null) {

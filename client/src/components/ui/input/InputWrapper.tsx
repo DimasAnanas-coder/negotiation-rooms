@@ -75,7 +75,7 @@ export default function InputWrapper({
                                 className="fixed inset-0 z-20"
                                 onClick={close}
                             />
-                            <div className={`border border-primary-border absolute top-full mt-1.5 z-40 rounded-xl min-w-45 bg-primary-bg ${dropdownClassName}`}>
+                            <div className={`border border-primary-border absolute top-full mt-1.5 z-40 rounded-xl min-w-max bg-primary-bg ${dropdownClassName}`}>
                                 {children}
                             </div>
                         </>
