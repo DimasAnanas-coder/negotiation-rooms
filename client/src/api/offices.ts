@@ -6,6 +6,6 @@ interface OfficesResponse {
 }
 
 export async function getOffices(): Promise<Office[]> {
-    const response = await httpClient.get<OfficesResponse>('/offhhices');
+    const response = await httpClient.get<OfficesResponse>('/offices');
     return response.data.items;
 }
