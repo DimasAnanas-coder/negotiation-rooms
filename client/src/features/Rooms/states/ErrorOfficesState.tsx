@@ -1,4 +1,5 @@
 import { ErrorState } from "../../../components/outlets/states";
+import Button from '../../../components/ui/Button';
 
 
 export default function ErrorOfficesState({
@@ -9,7 +10,10 @@ export default function ErrorOfficesState({
     return (
         <ErrorState
             description="Произошла ошибка при загрузке списка офисов"
-            onClick={onClick}
-        />
-    )
+        >
+            <Button variant="primary" size="lg" onClick={onClick}>
+                Попробовать снова
+            </Button>
+        </ErrorState>
+    );
 }

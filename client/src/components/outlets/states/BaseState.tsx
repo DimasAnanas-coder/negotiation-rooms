@@ -1,58 +1,23 @@
-import AlertTriangleIcon from '../../../assets/icons/alert-triangle.svg';
-import Button from '../../ui/Button';
-
-
-type Color = "gray" | "accent" | "red";
-
-const colorBg: Record<Color, string> = {
-    "gray": "bg-disabled-bg",
-    "accent": "bg-highlight-bg",
-    "red": "bg-error-bg",
-}
+import type { ReactNode } from 'react';
 
 interface BaseStateArgs {
-    color?: Color;
-    title?: string;
+    visual?: ReactNode;
+    title: string;
     description?: string;
-    icon: string;
-    buttonLabel?: string;
-    onClick?: () => void;
+    children?: ReactNode;
 }
 
-
-export default function BaseState({
-    color="red",
-    title="Ошибка",
-    description="Все, это конец",
-    icon=AlertTriangleIcon,
-    buttonLabel="",
-    onClick,
-}: BaseStateArgs){
+export default function BaseState({ visual, title, description, children }: BaseStateArgs) {
     return (
         <div className="flex flex-col items-center mt-20 gap-6 w-full h-full">
-            <div className={`flex justify-center items-center w-30 h-30 ${colorBg[color]} rounded-full`}>
-                <img 
-                    src={icon}
-                    className='w-14 h-14'
-                />
-            </div>
+            {visual}
             <div className='flex gap-3 flex-col items-center'>
                 <p className='text-title font-extrabold text-xl'>
                     {title}
                 </p>
-                <p className='text-sm'>
-                    {description}
-                </p>
+                {description && <p className='text-sm'>{description}</p>}
             </div>
-            {buttonLabel && onClick && (
-                <Button
-                    variant="primary"
-                    size="lg"
-                    onClick={onClick}
-                >
-                    {buttonLabel}
-                </Button>
-            )}
+            {children}
         </div>
     );
 }

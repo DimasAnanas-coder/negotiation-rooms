@@ -1,4 +1,5 @@
 import { ErrorState } from "../../../components/outlets/states";
+import Button from '../../../components/ui/Button';
 
 
 export default function ErrorRoomsState({
@@ -9,7 +10,10 @@ export default function ErrorRoomsState({
     return (
         <ErrorState
             description="Произошла ошибка при загрузке списка переговорных"
-            onClick={onClick}
-        />
-    )
+        >
+            <Button variant="primary" size="lg" onClick={onClick}>
+                Попробовать снова
+            </Button>
+        </ErrorState>
+    );
 }

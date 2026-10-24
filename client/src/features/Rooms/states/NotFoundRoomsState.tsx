@@ -1,6 +1,6 @@
 import SearchXIcon from '../../../assets/icons/search-x.svg';
-
-import { BaseState } from "../../../components/outlets/states";
+import Button from '../../../components/ui/Button';
+import { BaseState, IconCircle } from '../../../components/outlets/states';
 
 
 export default function NotFoundRoomsState({
@@ -10,12 +10,13 @@ export default function NotFoundRoomsState({
 }){
     return (
         <BaseState
-            icon={SearchXIcon}
-            color="gray"
+            visual={<IconCircle icon={SearchXIcon} color="gray" />}
             title="Нет доступных переговорных"
             description="Попробуйте изменить параметры фильтрации или выбрать другой офис"
-            buttonLabel='Сбросить фильтры'
-            onClick={onClick}
-        />
-    )
+        >
+            <Button variant="primary" size="lg" onClick={onClick}>
+                Сбросить фильтры
+            </Button>
+        </BaseState>
+    );
 }
