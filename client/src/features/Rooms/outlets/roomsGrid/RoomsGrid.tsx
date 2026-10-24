@@ -26,7 +26,13 @@ export default function RoomsGrid({ rooms, status }: RoomsGridProps) {
                 {visibleRooms.map((room, index) => (
                     <RoomCard
                         key={room?.id ?? `skeleton-${index}`}
-                        roomStatus={status === 'loading' ? 'loading' : 'available'}
+                        roomStatus={status === 'loading'
+                            ? 'loading'
+                            : room?.available === undefined
+                                ? 'not-selected'
+                                : room.available
+                                    ? 'available'
+                                    : 'unavailable'}
                         room={room}
                     />
                 ))}

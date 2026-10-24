@@ -3,7 +3,8 @@ import type { Room } from '../../../../../types/Rooms';
 export type RoomStatus
     = | 'loading'
         | 'available'
-        | 'unavailable';
+        | 'unavailable'
+        | 'not-selected';
 
 export interface RoomCardArgs {
     roomStatus: RoomStatus;

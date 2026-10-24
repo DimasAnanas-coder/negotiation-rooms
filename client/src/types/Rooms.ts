@@ -5,4 +5,5 @@ export interface Room {
     floor: number;
     capacity: number;
     features: Array<{ code: string; name: string }>;
+    available?: boolean;
 };

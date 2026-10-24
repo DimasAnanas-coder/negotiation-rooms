@@ -19,13 +19,15 @@ import {
 
 const NOT_SELECTED_DATE_ID = 0;
 
-export default function CalendarSelector() {
+interface CalendarSelectorProps {
+    value: Date | null;
+    onChange: (value: Date | null) => void;
+}
+
+export default function CalendarSelector({ value, onChange }: CalendarSelectorProps) {
     const today = startOfDay(new Date());
     const maximumDate = addDays(today, MAX_DAYS_AHEAD);
-    const [selectedDateId, setSelectedDateId] = useState(NOT_SELECTED_DATE_ID);
-    const selectedDate = selectedDateId === NOT_SELECTED_DATE_ID
-        ? null
-        : new Date(selectedDateId);
+    const selectedDateId = value?.getTime() ?? NOT_SELECTED_DATE_ID;
     const [visibleMonth, setVisibleMonth] = useState(() => startOfMonth(today));
     const { close } = useDropdown();
     const days = getMonthDays(visibleMonth);
@@ -35,12 +37,12 @@ export default function CalendarSelector() {
     };
 
     const selectDate = (date: Date) => {
-        setSelectedDateId(date.getTime());
+        onChange(date);
         close();
     };
 
     const clearDate = () => {
-        setSelectedDateId(NOT_SELECTED_DATE_ID);
+        onChange(null);
         close();
     };
 
@@ -49,7 +51,7 @@ export default function CalendarSelector() {
             <InputWrapper
                 id="date-selector"
                 leftIcon={CalendarIcon}
-                label={selectedDate ? formatSelectedDate(selectedDate) : 'Выберите дату'}
+                label={value ? formatSelectedDate(value) : 'Выберите дату'}
                 triggerClassName="!h-11 !w-42 !justify-start !rounded-lg !px-3.5 !py-0"
                 dropdownClassName="!w-[312px] p-4 shadow-xl"
             >

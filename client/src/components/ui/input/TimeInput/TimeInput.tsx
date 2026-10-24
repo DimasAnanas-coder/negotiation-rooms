@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ClockIcon from '../../../../assets/icons/clock.svg';
 
 import Field from '../Field';
@@ -10,24 +9,30 @@ import {
     completeTimeDigits,
 } from './timeMask';
 
-export default function TimeInput({ label }: { label?: string }) {
-    const [digits, setDigits] = useState<string>(DEFAULT_TIME_DIGITS);
+interface TimeInputProps {
+    label?: string;
+    value: string;
+    onChange: (value: string) => void;
+}
+
+export default function TimeInput({ label, value = DEFAULT_TIME_DIGITS, onChange }: TimeInputProps) {
+    const digits = value;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDigits(normalizeTimeDigits(e.target.value));
+        onChange(normalizeTimeDigits(e.target.value));
     };
 
     // Отдельно обрабатываем удаление символа, чтобы учесть удаление маски
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Backspace') {
             e.preventDefault();
-            setDigits(prev => prev.slice(0, -1));
+            onChange(digits.slice(0, -1));
         }
     };
 
     // Если пользователь начал ввод, дополняем неполное время нулями.
     const handleBlur = () => {
-        setDigits(prev => completeTimeDigits(prev));
+        onChange(completeTimeDigits(digits));
     };
 
     return (
