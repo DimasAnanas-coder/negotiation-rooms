@@ -8,4 +8,4 @@
 - `images/` — макеты интерфейса;
 - `Frontend-trainee-assignment-autumn-2026.md` — текст задания.
 
-Инструкции по запуску backend находятся в [`server/README.md`](server/README.md). Реализация frontend ещё не начата.
+Frontend уже разрабатывается в `client/`. Описание реализации и инструкции по запуску находятся в [`client/README.md`](client/README.md). Инструкции по запуску backend находятся в [`server/README.md`](server/README.md).
