@@ -11,17 +11,21 @@ import {
     formatMonth,
     formatSelectedDate,
     getMonthDays,
-    isSameDay,
     MAX_DAYS_AHEAD,
     startOfDay,
     startOfMonth,
     WEEKDAYS,
 } from './calendarDate';
 
+const NOT_SELECTED_DATE_ID = 0;
+
 export default function CalendarSelector() {
     const today = startOfDay(new Date());
     const maximumDate = addDays(today, MAX_DAYS_AHEAD);
-    const [selectedDate, setSelectedDate] = useState(today);
+    const [selectedDateId, setSelectedDateId] = useState(NOT_SELECTED_DATE_ID);
+    const selectedDate = selectedDateId === NOT_SELECTED_DATE_ID
+        ? null
+        : new Date(selectedDateId);
     const [visibleMonth, setVisibleMonth] = useState(() => startOfMonth(today));
     const { close } = useDropdown();
     const days = getMonthDays(visibleMonth);
@@ -31,7 +35,12 @@ export default function CalendarSelector() {
     };
 
     const selectDate = (date: Date) => {
-        setSelectedDate(date);
+        setSelectedDateId(date.getTime());
+        close();
+    };
+
+    const clearDate = () => {
+        setSelectedDateId(NOT_SELECTED_DATE_ID);
         close();
     };
 
@@ -40,7 +49,7 @@ export default function CalendarSelector() {
             <InputWrapper
                 id="date-selector"
                 leftIcon={CalendarIcon}
-                label={formatSelectedDate(selectedDate)}
+                label={selectedDate ? formatSelectedDate(selectedDate) : 'Выберите дату'}
                 triggerClassName="!h-11 !w-42 !justify-start !rounded-lg !px-3.5 !py-0"
                 dropdownClassName="!w-[312px] p-4 shadow-xl"
             >
@@ -66,6 +75,18 @@ export default function CalendarSelector() {
                         </div>
                     </div>
 
+                    <Button
+                        aria-pressed={selectedDateId === NOT_SELECTED_DATE_ID}
+                        className="mb-2 w-full justify-start! text-[14px]"
+                        isSelected={selectedDateId === NOT_SELECTED_DATE_ID}
+                        size="sm"
+                        variant="ghost"
+                        weight="normal"
+                        onClick={clearDate}
+                    >
+                        Не выбрано
+                    </Button>
+
                     <div className="mb-2 grid grid-cols-7 justify-items-center">
                         {WEEKDAYS.map((weekday) => (
                             <span className="py-1 text-[13px] font-medium text-disabled" key={weekday}>
@@ -78,7 +99,7 @@ export default function CalendarSelector() {
                         {days.map((date) => {
                             const isCurrentMonth = date.getMonth() === visibleMonth.getMonth();
                             const isBeyondLimit = date.getTime() > maximumDate.getTime();
-                            const isSelected = isSameDay(date, selectedDate);
+                            const isSelected = selectedDateId === date.getTime();
                             const isDisabled = !isCurrentMonth || isBeyondLimit;
 
                             return (

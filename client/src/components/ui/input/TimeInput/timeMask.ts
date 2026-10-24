@@ -1,4 +1,4 @@
-export const DEFAULT_TIME_DIGITS = '1500';
+export const DEFAULT_TIME_DIGITS = '';
 
 /** Ограничивает число диапазоном [min, max] */
 export function clamp(n: number, min: number, max: number): number {
@@ -41,10 +41,10 @@ export function normalizeTimeDigits(raw: string): string {
 /**
  * Дополняет неполный ввод до валидного времени (для onBlur).
  * "15" → "1500"
- * ""   → "1500"
+ * ""   → ""
  */
-export function completeTimeDigits(digits: string, fallback = DEFAULT_TIME_DIGITS): string {
-    if (digits.length === 0) return fallback;
+export function completeTimeDigits(digits: string): string {
+    if (digits.length === 0) return '';
     const padded = (digits + '0000').slice(0, 4);
     const hh = String(clamp(Number(padded.slice(0, 2)), 0, 23)).padStart(2, '0');
     const mm = String(clamp(Number(padded.slice(2, 4)), 0, 59)).padStart(2, '0');

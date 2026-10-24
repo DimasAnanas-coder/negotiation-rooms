@@ -7,8 +7,9 @@ interface Time {
     value: string;
 }
 
-const DEFAULT_TIME_ID = 4;
+const NOT_SELECTED_TIME_ID = 0;
 const TIMES: Array<Time> = [
+    { id: NOT_SELECTED_TIME_ID, value: 'Выберите' },
     { id: 1, value: '15 мин' },
     { id: 2, value: '30 мин' },
     { id: 3, value: '45 мин' },
@@ -20,11 +21,11 @@ const TIMES: Array<Time> = [
 ];
 
 function findTime(id: number): Time {
-    return TIMES.find((time: Time) => time.id == id) || TIMES[DEFAULT_TIME_ID];
+    return TIMES.find((time: Time) => time.id === id) || TIMES[0];
 }
 
 export default function TimeSelector({ label }: { label?: string }) {
-    const [activeTimeId, setActiveTimeId] = useState<number>(DEFAULT_TIME_ID);
+    const [activeTimeId, setActiveTimeId] = useState<number>(NOT_SELECTED_TIME_ID);
     return (
         <Field
             label={label || 'ДЛИТЕЛЬНОСТЬ'}

@@ -9,7 +9,7 @@ interface UserCapacity {
     usersCount: number;
 }
 
-const DEFAULT_USER_CAPACITY_ID = 1;
+const NOT_SELECTED_CAPACITY_ID = 0;
 const USERS_CAPACITY: Array<UserCapacity> = [
     { id: 1, usersCount: 2 },
     { id: 2, usersCount: 4 },
@@ -19,12 +19,20 @@ const USERS_CAPACITY: Array<UserCapacity> = [
     { id: 6, usersCount: 12 },
 ];
 
-function findCapacity(id: number): UserCapacity {
-    return USERS_CAPACITY.find((capacity: UserCapacity) => capacity.id == id) || USERS_CAPACITY[DEFAULT_USER_CAPACITY_ID];
+function findCapacity(id: number): UserCapacity | undefined {
+    return USERS_CAPACITY.find((capacity: UserCapacity) => capacity.id === id);
 }
 
 export default function CapacitySelector() {
-    const [activeUserCapacityId, setActiveUserCapacityId] = useState<number>(DEFAULT_USER_CAPACITY_ID);
+    const [activeUserCapacityId, setActiveUserCapacityId] = useState<number>(NOT_SELECTED_CAPACITY_ID);
+    const activeCapacity = findCapacity(activeUserCapacityId);
+    const capacityOptions = [
+        { id: NOT_SELECTED_CAPACITY_ID, value: 'Не указано' },
+        ...USERS_CAPACITY.map((capacity) => ({
+            id: capacity.id,
+            value: `${capacity.usersCount} чел.`,
+        })),
+    ];
 
     return (
         <Field
@@ -34,10 +42,10 @@ export default function CapacitySelector() {
                 id="Capacity-selector"
                 leftIcon={UsersIcon}
                 activeListItemId={activeUserCapacityId}
-                label={`Мин. ${findCapacity(activeUserCapacityId).usersCount} чел.`}
-                list={USERS_CAPACITY.map((userCapacity: UserCapacity) => {
-                    return { id: userCapacity.id, value: `${userCapacity.usersCount} чел.` };
-                })}
+                label={activeCapacity
+                    ? `Мин. ${activeCapacity.usersCount} чел.`
+                    : 'Не указано'}
+                list={capacityOptions}
                 onSelect={setActiveUserCapacityId}
             />
         </Field>

@@ -25,7 +25,7 @@ export default function TimeInput({ label }: { label?: string }) {
         }
     };
 
-    // Если пользователь не ввел время до конца, то отстаток маски заполнится в этой функции нулями
+    // Если пользователь начал ввод, дополняем неполное время нулями.
     const handleBlur = () => {
         setDigits(prev => completeTimeDigits(prev));
     };
@@ -47,7 +47,7 @@ export default function TimeInput({ label }: { label?: string }) {
                     onBlur={handleBlur}
                     onFocus={e => e.target.select()}
                     placeholder="--:--"
-                    className="flex w-10 border-0 text-[14px] text-title focus:outline-none"
+                    className={`flex w-10 border-0 text-[14px] focus:outline-none ${digits ? 'text-title' : 'text-disabled'}`}
                 />
             </InputWrapper>
         </Field>
