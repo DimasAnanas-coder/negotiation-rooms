@@ -11,6 +11,15 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     isSelected?: boolean;
 }
 
+export interface ButtonStyleProps {
+    variant?: ButtonVariant;
+    size?: ButtonSize;
+    weight?: ButtonWeight;
+    isSelected?: boolean;
+    disabled?: boolean;
+    className?: string;
+}
+
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
     primary: 'bg-active-bg text-secondary hover:brightness-95 disabled:bg-disabled-bg disabled:text-disabled',
     secondary: 'border border-primary-border bg-primary-bg text-title hover:bg-secondary-bg disabled:hover:bg-primary-bg',
@@ -31,6 +40,30 @@ const WEIGHT_CLASSES: Record<ButtonWeight, string> = {
     bold: 'font-bold',
 };
 
+export function getButtonClassName({
+    variant = 'primary',
+    size = 'md',
+    weight = 'semibold',
+    isSelected = false,
+    disabled = false,
+    className = '',
+}: ButtonStyleProps) {
+    const variantClassName = variant === 'ghost' && isSelected
+        ? 'bg-highlight-bg text-title'
+        : VARIANT_CLASSES[variant];
+
+    return [
+        'inline-flex items-center justify-center gap-2 transition-colors',
+        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+        'disabled:cursor-not-allowed',
+        variantClassName,
+        SIZE_CLASSES[size],
+        WEIGHT_CLASSES[weight],
+        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+        className,
+    ].filter(Boolean).join(' ');
+}
+
 export default function Button({
     variant = 'primary',
     size = 'md',
@@ -42,20 +75,7 @@ export default function Button({
     children,
     ...buttonProps
 }: ButtonProps) {
-    const variantClassName = variant === 'ghost' && isSelected
-        ? 'bg-highlight-bg text-title'
-        : VARIANT_CLASSES[variant];
-
-    const classes = [
-        'inline-flex items-center justify-center gap-2 transition-colors',
-        'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
-        'disabled:cursor-not-allowed',
-        variantClassName,
-        SIZE_CLASSES[size],
-        WEIGHT_CLASSES[weight],
-        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
-        className,
-    ].filter(Boolean).join(' ');
+    const classes = getButtonClassName({ variant, size, weight, isSelected, disabled, className });
 
     return (
         <button
