@@ -16,7 +16,7 @@ export default function Room() {
         ? { status: 'active' as const, room, office: room.office }
         : { status: 'loading' as const };
     const scheduleProps = hasLoadedRoom
-        ? { status: 'active' as const, roomId: room.id, timezone: room.office.timezone }
+        ? { status: 'active' as const, room, timezone: room.office.timezone }
         : { status: 'loading' as const };
 
     return (

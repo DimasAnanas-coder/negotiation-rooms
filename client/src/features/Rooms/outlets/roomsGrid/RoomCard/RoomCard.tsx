@@ -103,6 +103,8 @@ export default function RoomCard({
                 <ReserveBookButton
                     roomStatus={roomStatus}
                     room={room}
+                    timezone={timezone}
+                    availabilityInterval={availabilityInterval}
                 />
             </div>
 

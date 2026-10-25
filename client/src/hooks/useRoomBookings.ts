@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { getRoomBookings, type RoomBookingsQuery } from '../api/roomBookings';
 import type { RoomBooking } from '../types/Booking';
 import useApi from './useApi';
@@ -21,6 +21,11 @@ export default function useRoomBookings(
         roomId !== null && from !== undefined && to !== undefined,
         EMPTY_BOOKINGS,
     );
+
+    useEffect(() => {
+        window.addEventListener('bookings-changed', refetch);
+        return () => window.removeEventListener('bookings-changed', refetch);
+    }, [refetch]);
 
     return {
         bookings: data,

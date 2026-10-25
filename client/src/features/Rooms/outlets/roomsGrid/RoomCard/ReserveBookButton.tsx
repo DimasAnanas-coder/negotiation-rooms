@@ -1,21 +1,21 @@
-import Button from '../../../../../components/ui/Button';
+import BookingButton from '../../../../Bookings/components/BookingButton';
 import type { RoomCardArgs } from './types';
 
 export default function ReserveBookButton({
     roomStatus,
     room,
+    timezone,
+    availabilityInterval,
 }: RoomCardArgs) {
-    const handleReserve = () => {
-        alert(`Резервация ${room?.name}`);
-    };
+    if (!room || !timezone) return null;
 
     return (
-        <Button
-            variant="primary"
-            disabled={roomStatus !== 'available'}
-            onClick={handleReserve}
-        >
-            Забронировать
-        </Button>
+        <BookingButton
+            label="Забронировать"
+            room={room}
+            timezone={timezone}
+            interval={availabilityInterval}
+            disabled={roomStatus === 'loading' || roomStatus === 'unavailable'}
+        />
     );
 }

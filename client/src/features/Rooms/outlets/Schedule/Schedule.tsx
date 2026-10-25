@@ -3,6 +3,8 @@ import CalendarSelector from '../../../../components/ui/input/selectors/Calendar
 import { useCurrentUser, useRoomBookings } from '../../../../hooks';
 import { formatOfficeTime, getOfficeWorkdayRange } from '../../../../utils/officeTime';
 import ScheduleSkeleton from './ScheduleSkeleton';
+import BookingButton from '../../../Bookings/components/BookingButton';
+import type { Room } from '../../../../types/Rooms';
 
 const WORKDAY_DURATION_MINUTES = 11 * 60;
 const SLOT_MINUTES = 15;
@@ -10,7 +12,7 @@ const TIMELINE_HEIGHT = 704;
 
 type ScheduleProps
     = | { status: 'loading' }
-        | { status: 'active'; roomId: string; timezone: string };
+        | { status: 'active'; room: Room; timezone: string };
 
 function formatScheduleDate(date: Date | null, timezone: string): string {
     const displayDate = date
@@ -41,7 +43,7 @@ function getOfficeCurrentDate(timezone: string): Date {
 
 export default function Schedule(props: ScheduleProps) {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const roomId = props.status === 'active' ? props.roomId : null;
+    const roomId = props.status === 'active' ? props.room.id : null;
     const timezone = props.status === 'active' ? props.timezone : 'UTC';
     const calendarDate = selectedDate ?? getOfficeCurrentDate(timezone);
     const interval = props.status === 'active'
@@ -143,6 +145,9 @@ export default function Schedule(props: ScheduleProps) {
                         );
                     })}
                 </div>
+            </div>
+            <div className="mt-6 flex justify-end">
+                <BookingButton label="Забронировать комнату" room={props.room} timezone={timezone} />
             </div>
         </section>
     );
