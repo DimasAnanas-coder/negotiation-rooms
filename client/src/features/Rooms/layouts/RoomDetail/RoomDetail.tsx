@@ -1,22 +1,25 @@
 import type { Office } from '../../../../types/Office';
 import type { Room } from '../../../../types/Rooms';
-import type { LayoutStatus } from '../types';
 import RoomFeature from './RoomFeature';
 import RoomDetailSkeleton from './RoomDetailSkeleton';
 
-interface RoomDetailProps {
-    room: Room;
-    office: Office;
-    status: LayoutStatus;
-}
+type RoomDetailProps
+    = | { status: 'loading' }
+        | {
+            status: 'active';
+            room: Room;
+            office: Office;
+        };
 
-export default function RoomDetail({ room, office, status }: RoomDetailProps) {
-    if (status === 'loading') {
+export default function RoomDetail(props: RoomDetailProps) {
+    if (props.status === 'loading') {
         return <RoomDetailSkeleton />;
     }
 
+    const { room, office } = props;
+
     return (
-        <aside 
+        <aside
             className="w-full rounded-2xl border border-primary-border bg-primary-bg p-6 lg:w-[420px]"
         >
             <h1 id="room-title" className="text-2xl font-extrabold text-title">{room.name}</h1>

@@ -1,18 +1,22 @@
 import { Link } from 'react-router-dom';
 import ChevronRightIcon from '../../../../assets/icons/chevron-right.svg';
-import type { LayoutStatus } from '../types';
 import BreadCrumbsSkeleton from './BreadCrumbsSkeleton';
 
-interface BreadCrumbsProps {
-    officeName: string;
-    roomName: string;
-    status: LayoutStatus;
-}
+type BreadCrumbsProps
+    = | { status: 'loading' }
+        | {
+            status: 'active';
+            officeName: string;
+            roomName: string;
+        };
 
-export default function BreadCrumbs({ officeName, roomName, status }: BreadCrumbsProps) {
+export default function BreadCrumbs(props: BreadCrumbsProps) {
+    const { status } = props;
     if (status === 'loading') {
         return <BreadCrumbsSkeleton />;
     }
+
+    const { officeName, roomName } = props;
 
     const separator = (
         <img className="size-3.5" src={ChevronRightIcon} alt="" />
