@@ -2,7 +2,7 @@ import Skeleton from '../../../../components/ui/Skeleton';
 
 export default function ScheduleSkeleton() {
     return (
-        <div className="min-h-140 flex-1 rounded-2xl border border-primary-border bg-primary-bg p-6" aria-hidden="true">
+        <div className="min-h-140 w-full flex-1 rounded-2xl border border-primary-border bg-primary-bg p-6 lg:w-auto" aria-hidden="true">
             <div className="flex items-start justify-between gap-4">
                 <div className="flex flex-col gap-2">
                     <Skeleton className="h-6 w-48" />

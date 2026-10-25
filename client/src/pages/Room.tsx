@@ -8,12 +8,15 @@ import { useRoom } from '../hooks';
 export default function Room() {
     const { roomId } = useParams();
     const { room, status } = useRoom(roomId);
-    const layoutStatus = status === 'loaded' && room ? 'active' : 'loading';
-    const breadcrumbsProps = layoutStatus === 'active'
+    const hasLoadedRoom = status === 'loaded' && room !== null;
+    const breadcrumbsProps = hasLoadedRoom
         ? { status: 'active' as const, officeName: room.office.name, roomName: room.name }
         : { status: 'loading' as const };
-    const roomDetailProps = layoutStatus === 'active'
+    const roomDetailProps = hasLoadedRoom
         ? { status: 'active' as const, room, office: room.office }
+        : { status: 'loading' as const };
+    const scheduleProps = hasLoadedRoom
+        ? { status: 'active' as const, roomId: room.id, timezone: room.office.timezone }
         : { status: 'loading' as const };
 
     return (
@@ -22,7 +25,7 @@ export default function Room() {
                 <BreadCrumbs {...breadcrumbsProps} />
                 <div className="mt-3 flex flex-col items-start gap-8 lg:flex-row">
                     <RoomDetail {...roomDetailProps} />
-                    <Schedule status={layoutStatus} />
+                    <Schedule {...scheduleProps} />
                 </div>
             </Container>
         </div>
