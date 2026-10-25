@@ -20,7 +20,7 @@ export default function RoomDetail(props: RoomDetailProps) {
 
     return (
         <aside
-            className="w-full rounded-2xl border border-primary-border bg-primary-bg p-6 lg:w-[420px]"
+            className="w-full rounded-2xl border border-primary-border bg-primary-bg p-6 lg:w-105"
         >
             <h1 id="room-title" className="text-2xl font-extrabold text-title">{room.name}</h1>
             <p className="mt-2 text-sm">{office.name} · {office.address}</p>
