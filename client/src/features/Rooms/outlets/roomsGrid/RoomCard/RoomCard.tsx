@@ -26,7 +26,7 @@ export default function RoomCard({
         return <RoomCardSkeleton />;
     }
 
-    const detail = '/rooms';
+    const detail = `/rooms/${encodeURIComponent(room.id)}`;
     let occupancyLabel = 'Укажите дату и время';
 
     if (scheduleStatus === 'loading') {
