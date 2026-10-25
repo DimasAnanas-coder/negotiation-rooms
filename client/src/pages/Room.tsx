@@ -10,7 +10,7 @@ export default function Room() {
     const { room, status } = useRoom(roomId);
     const hasLoadedRoom = status === 'loaded' && room !== null;
     const breadcrumbsProps = hasLoadedRoom
-        ? { status: 'active' as const, officeName: room.office.name, roomName: room.name }
+        ? { status: 'active' as const, officeId: room.office.id, officeName: room.office.name, roomName: room.name }
         : { status: 'loading' as const };
     const roomDetailProps = hasLoadedRoom
         ? { status: 'active' as const, room, office: room.office }
