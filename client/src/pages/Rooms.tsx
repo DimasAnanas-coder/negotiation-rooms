@@ -1,8 +1,10 @@
-import { useMemo, useState, type ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import type { RoomsQuery } from '../api/rooms';
 import FilterBar from '../features/Rooms/layout/FilterBar';
 import OfficeSelector from '../features/Rooms/layout/OfficeSelector';
 import RoomsGrid from '../features/Rooms/outlets/roomsGrid';
+import { parseRoomFilters, updateRoomFilterSearchParams } from '../features/Rooms/lib/roomFiltersSearchParams';
 import {
     ErrorOfficesState,
     ErrorRoomsState,
@@ -13,21 +15,15 @@ import { useOffices, useRooms } from '../hooks';
 import type { RoomFilterValues } from '../features/Rooms/types';
 import { getOfficeWorkdayRange } from '../utils/officeTime';
 
-const EMPTY_ROOM_FILTERS: RoomFilterValues = {
-    date: null,
-    startTime: '',
-    durationMinutes: null,
-    minCapacity: null,
-};
-
 export default function Rooms() {
     const { offices, status: officesStatus, refetch: refetchOffices } = useOffices();
-    const [requestedOfficeId, setRequestedOfficeId] = useState<string | null>(null);
-    const [filters, setFilters] = useState<RoomFilterValues>(EMPTY_ROOM_FILTERS);
-    const selectedOfficeId = offices.some((office) => office.id === requestedOfficeId)
+    const [searchParams, setSearchParams] = useSearchParams();
+    const requestedOfficeId = searchParams.get('officeId');
+    const filters = useMemo(() => parseRoomFilters(searchParams), [searchParams]);
+    const selectedOfficeId = offices.some(office => office.id === requestedOfficeId)
         ? requestedOfficeId
         : null;
-    const selectedOffice = offices.find((office) => office.id === selectedOfficeId);
+    const selectedOffice = offices.find(office => office.id === selectedOfficeId);
     const scheduleInterval = selectedOffice
         ? getOfficeWorkdayRange(filters.date, selectedOffice.timezone)
         : null;
@@ -54,19 +50,38 @@ export default function Rooms() {
     }, [filters]);
     const { rooms, status: roomsStatus, refetch: refetchRooms } = useRooms(selectedOfficeId, roomsQuery);
 
+    const updateFilters = (nextFilters: RoomFilterValues) => {
+        setSearchParams((currentParams) => {
+            return updateRoomFilterSearchParams(currentParams, nextFilters);
+        }, { replace: true });
+    };
+
+    const updateOffice = (officeId: string) => {
+        setSearchParams((currentParams) => {
+            const nextParams = new URLSearchParams(currentParams);
+            nextParams.set('officeId', officeId);
+            return nextParams;
+        }, { replace: true });
+    };
+
     let roomsContent: ReactNode;
 
     if (officesStatus === 'loading') {
-        roomsContent = <RoomsGrid rooms={rooms} status="loading" />;;
-    } else if (officesStatus === 'error') {
+        roomsContent = <RoomsGrid rooms={rooms} status="loading" />;
+    }
+    else if (officesStatus === 'error') {
         roomsContent = <ErrorOfficesState onClick={refetchOffices} />;
-    } else if (!selectedOfficeId) {
+    }
+    else if (!selectedOfficeId) {
         roomsContent = <OfficeNotSelectedState />;
-    } else if (roomsStatus === 'error') {
+    }
+    else if (roomsStatus === 'error') {
         roomsContent = <ErrorRoomsState onClick={refetchRooms} />;
-    } else if (roomsStatus === 'loaded' && rooms.length === 0) {
+    }
+    else if (roomsStatus === 'loaded' && rooms.length === 0) {
         roomsContent = <NotFoundRoomsState onClick={() => {}} />;
-    } else {
+    }
+    else {
         roomsContent = (
             <RoomsGrid
                 rooms={rooms}
@@ -85,9 +100,9 @@ export default function Rooms() {
             <OfficeSelector
                 offices={offices}
                 selectedOfficeId={selectedOfficeId}
-                onOfficeChange={setRequestedOfficeId}
+                onOfficeChange={updateOffice}
             />
-            <FilterBar filters={filters} onChange={setFilters} />
+            <FilterBar filters={filters} onChange={updateFilters} />
             {roomsContent}
         </>
     );
