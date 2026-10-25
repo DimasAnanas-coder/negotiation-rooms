@@ -20,7 +20,6 @@ export default function RoomCard({
     const {
         bookings,
         status: scheduleStatus,
-        refetch: refetchSchedule,
     } = useRoomBookings(room?.id ?? null, scheduleInterval);
 
     if (roomStatus == 'loading' || room == undefined) {
