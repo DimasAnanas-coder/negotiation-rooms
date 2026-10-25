@@ -16,9 +16,16 @@ function parseDate(value: string | null): Date | null {
     return date;
 }
 
+function parseStartTime(value: string | null): string {
+    const digits = value?.replace(':', '') ?? '';
+    if (!/^\d{0,4}$/.test(digits)) return '';
+    if (digits.length >= 2 && Number(digits.slice(0, 2)) > 23) return '';
+    if (digits.length === 4 && Number(digits.slice(2, 4)) > 59) return '';
+
+    return digits;
+}
+
 export function parseRoomFilters(searchParams: URLSearchParams): RoomFilterValues {
-    const rawTime = searchParams.get('startTime')?.replace(':', '') ?? '';
-    const startTime = /^(?:[01]\d|2[0-3])[0-5]\d$/.test(rawTime) ? rawTime : '';
     const rawDuration = Number(searchParams.get('durationMinutes'));
     const durationMinutes = [15, 30, 45, 60, 75, 90, 105, 120].includes(rawDuration)
         ? rawDuration
@@ -30,7 +37,7 @@ export function parseRoomFilters(searchParams: URLSearchParams): RoomFilterValue
 
     return {
         date: parseDate(searchParams.get('date')),
-        startTime,
+        startTime: parseStartTime(searchParams.get('startTime')),
         durationMinutes,
         minCapacity,
     };
@@ -52,8 +59,11 @@ export function updateRoomFilterSearchParams(
         const day = String(filters.date.getDate()).padStart(2, '0');
         nextParams.set('date', `${year}-${month}-${day}`);
     }
-    if (filters.startTime.length === 4) {
-        nextParams.set('startTime', `${filters.startTime.slice(0, 2)}:${filters.startTime.slice(2)}`);
+    if (filters.startTime.length > 0) {
+        const value = filters.startTime.length === 4
+            ? `${filters.startTime.slice(0, 2)}:${filters.startTime.slice(2)}`
+            : filters.startTime;
+        nextParams.set('startTime', value);
     }
     if (filters.durationMinutes !== null) {
         nextParams.set('durationMinutes', String(filters.durationMinutes));
