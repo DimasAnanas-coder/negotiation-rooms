@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 interface BaseStateArgs {
     visual?: ReactNode;
     title: string;
+    titleId?: string;
     description?: string;
     children?: ReactNode;
     layout?: 'content' | 'page';
@@ -11,6 +12,7 @@ interface BaseStateArgs {
 export default function BaseState({
     visual,
     title,
+    titleId,
     description,
     children,
     layout = 'content',
@@ -22,11 +24,11 @@ export default function BaseState({
     return (
         <div className={`flex w-full flex-col items-center gap-6 ${layoutClassName}`}>
             {visual}
-            <div className='flex gap-3 flex-col items-center'>
-                <p className='text-title font-extrabold text-xl'>
+            <div className="flex gap-3 flex-col items-center">
+                <p id={titleId} className="text-title font-extrabold text-xl">
                     {title}
                 </p>
-                {description && <p className='max-w-sm text-center text-sm'>{description}</p>}
+                {description && <p className="max-w-sm text-center text-sm">{description}</p>}
             </div>
             {children}
         </div>
