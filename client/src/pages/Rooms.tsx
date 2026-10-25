@@ -11,6 +11,7 @@ import {
 } from '../features/Rooms/states';
 import { useOffices, useRooms } from '../hooks';
 import type { RoomFilterValues } from '../features/Rooms/types';
+import { getOfficeWorkdayRange } from '../utils/officeTime';
 
 const EMPTY_ROOM_FILTERS: RoomFilterValues = {
     date: null,
@@ -25,6 +26,10 @@ export default function Rooms() {
     const [filters, setFilters] = useState<RoomFilterValues>(EMPTY_ROOM_FILTERS);
     const selectedOfficeId = offices.some((office) => office.id === requestedOfficeId)
         ? requestedOfficeId
+        : null;
+    const selectedOffice = offices.find((office) => office.id === selectedOfficeId);
+    const scheduleInterval = selectedOffice
+        ? getOfficeWorkdayRange(filters.date, selectedOffice.timezone)
         : null;
     const roomsQuery = useMemo<RoomsQuery>(() => {
         const query: RoomsQuery = {};
@@ -62,7 +67,17 @@ export default function Rooms() {
     } else if (roomsStatus === 'loaded' && rooms.length === 0) {
         roomsContent = <NotFoundRoomsState onClick={() => {}} />;
     } else {
-        roomsContent = <RoomsGrid rooms={rooms} status={roomsStatus} />;
+        roomsContent = (
+            <RoomsGrid
+                rooms={rooms}
+                status={roomsStatus}
+                timezone={selectedOffice?.timezone}
+                scheduleInterval={scheduleInterval}
+                availabilityInterval={roomsQuery.from && roomsQuery.to
+                    ? { from: roomsQuery.from, to: roomsQuery.to }
+                    : null}
+            />
+        );
     }
 
     return (

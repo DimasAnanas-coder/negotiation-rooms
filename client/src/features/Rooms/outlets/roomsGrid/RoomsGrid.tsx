@@ -8,9 +8,18 @@ const LOADING_SKELETON_ROOMS: Array<undefined> = Array.from({ length: 4 }, () =>
 interface RoomsGridProps {
     rooms: Room[];
     status: Exclude<RequestStatus, 'error'>;
+    timezone?: string;
+    scheduleInterval?: { from: string; to: string } | null;
+    availabilityInterval?: { from: string; to: string } | null;
 }
 
-export default function RoomsGrid({ rooms, status }: RoomsGridProps) {
+export default function RoomsGrid({
+    rooms,
+    status,
+    timezone,
+    scheduleInterval,
+    availabilityInterval,
+}: RoomsGridProps) {
     const visibleRooms: Array<Room | undefined> = status === 'loading'
         ? LOADING_SKELETON_ROOMS
         : rooms;
@@ -34,6 +43,9 @@ export default function RoomsGrid({ rooms, status }: RoomsGridProps) {
                                     ? 'available'
                                     : 'unavailable'}
                         room={room}
+                        timezone={timezone}
+                        scheduleInterval={scheduleInterval}
+                        availabilityInterval={availabilityInterval}
                     />
                 ))}
             </div>
