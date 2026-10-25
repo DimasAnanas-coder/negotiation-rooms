@@ -22,9 +22,10 @@ const NOT_SELECTED_DATE_ID = 0;
 interface CalendarSelectorProps {
     value: Date | null;
     onChange: (value: Date | null) => void;
+    showClearOption?: boolean;
 }
 
-export default function CalendarSelector({ value, onChange }: CalendarSelectorProps) {
+export default function CalendarSelector({ value, onChange, showClearOption = true }: CalendarSelectorProps) {
     const today = startOfDay(new Date());
     const maximumDate = addDays(today, MAX_DAYS_AHEAD);
     const selectedDateId = value?.getTime() ?? NOT_SELECTED_DATE_ID;
@@ -33,7 +34,7 @@ export default function CalendarSelector({ value, onChange }: CalendarSelectorPr
     const days = getMonthDays(visibleMonth);
 
     const changeMonth = (offset: number) => {
-        setVisibleMonth((month) => new Date(month.getFullYear(), month.getMonth() + offset, 1));
+        setVisibleMonth(month => new Date(month.getFullYear(), month.getMonth() + offset, 1));
     };
 
     const selectDate = (date: Date) => {
@@ -77,20 +78,22 @@ export default function CalendarSelector({ value, onChange }: CalendarSelectorPr
                         </div>
                     </div>
 
-                    <Button
-                        aria-pressed={selectedDateId === NOT_SELECTED_DATE_ID}
-                        className="mb-2 w-full justify-start! text-[14px]"
-                        isSelected={selectedDateId === NOT_SELECTED_DATE_ID}
-                        size="sm"
-                        variant="ghost"
-                        weight="normal"
-                        onClick={clearDate}
-                    >
-                        Не выбрано
-                    </Button>
+                    {showClearOption && (
+                        <Button
+                            aria-pressed={selectedDateId === NOT_SELECTED_DATE_ID}
+                            className="mb-2 w-full justify-start! text-[14px]"
+                            isSelected={selectedDateId === NOT_SELECTED_DATE_ID}
+                            size="sm"
+                            variant="ghost"
+                            weight="normal"
+                            onClick={clearDate}
+                        >
+                            Не выбрано
+                        </Button>
+                    )}
 
                     <div className="mb-2 grid grid-cols-7 justify-items-center">
-                        {WEEKDAYS.map((weekday) => (
+                        {WEEKDAYS.map(weekday => (
                             <span className="py-1 text-[13px] font-medium text-disabled" key={weekday}>
                                 {weekday}
                             </span>
