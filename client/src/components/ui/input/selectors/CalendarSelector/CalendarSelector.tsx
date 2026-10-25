@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import CalendarIcon from '../../../../../assets/icons/calendar.svg';
 import ChevronDownIcon from '../../../../../assets/icons/chevron-down.svg';
 import { useDropdown } from '../../../../../context/DropdownContext';
@@ -24,6 +24,11 @@ interface CalendarSelectorProps {
     onChange: (value: Date | null) => void;
     showClearOption?: boolean;
     dropdownAlign?: 'left' | 'right';
+    label?: string;
+    labelClassName?: string;
+    triggerClassName?: string;
+    dropdownClassName?: string;
+    error?: string;
 }
 
 export default function CalendarSelector({
@@ -31,7 +36,13 @@ export default function CalendarSelector({
     onChange,
     showClearOption = true,
     dropdownAlign = 'left',
+    label = 'ДАТА',
+    labelClassName,
+    triggerClassName = '!h-11 !w-42 !justify-start !rounded-lg !px-3.5 !py-0',
+    dropdownClassName = '!w-[312px] p-4 shadow-xl',
+    error,
 }: CalendarSelectorProps) {
+    const id = useId();
     const today = startOfDay(new Date());
     const maximumDate = addDays(today, MAX_DAYS_AHEAD);
     const selectedDateId = value?.getTime() ?? NOT_SELECTED_DATE_ID;
@@ -54,14 +65,16 @@ export default function CalendarSelector({
     };
 
     return (
-        <Field label="ДАТА">
+        <Field label={label} labelClassName={labelClassName} error={error} errorId={`${id}-error`}>
             <InputWrapper
-                id="date-selector"
+                id={id}
                 leftIcon={CalendarIcon}
                 label={value ? formatSelectedDate(value) : 'Выберите дату'}
-                triggerClassName="!h-11 !w-42 !justify-start !rounded-lg !px-3.5 !py-0"
-                dropdownClassName="!w-[312px] p-4 shadow-xl"
+                triggerClassName={triggerClassName}
+                dropdownClassName={dropdownClassName}
                 dropdownAlign={dropdownAlign}
+                invalid={Boolean(error)}
+                describedBy={error ? `${id}-error` : undefined}
             >
                 <div aria-label="Выбор даты">
                     <div className="mb-3 flex items-center justify-between">

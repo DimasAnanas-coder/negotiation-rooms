@@ -1,5 +1,7 @@
 import Select from '../Select';
 import Field from '../../Field';
+import { useId } from 'react';
+import { useDropdown } from '../../../../../context/DropdownContext';
 
 interface Time {
     id: number;
@@ -27,20 +29,41 @@ interface TimeSelectorProps {
     label?: string;
     value: number | null;
     onChange: (value: number | null) => void;
+    showClearOption?: boolean;
+    labelClassName?: string;
+    triggerClassName?: string;
+    dropdownClassName?: string;
+    error?: string;
 }
 
-export default function TimeSelector({ label, value, onChange }: TimeSelectorProps) {
+export default function TimeSelector({
+    label, value, onChange, showClearOption = true,
+    labelClassName, triggerClassName, dropdownClassName,
+    error,
+}: TimeSelectorProps) {
+    const id = useId();
+    const { close } = useDropdown();
     const activeTimeId = value ?? NOT_SELECTED_TIME_ID;
     return (
         <Field
             label={label || 'ДЛИТЕЛЬНОСТЬ'}
+            labelClassName={labelClassName}
+            error={error}
+            errorId={`${id}-error`}
         >
             <Select
-                id="Time-selector"
-                onSelect={(id) => onChange(id === NOT_SELECTED_TIME_ID ? null : id)}
+                id={id}
+                onSelect={(id) => {
+                    onChange(id === NOT_SELECTED_TIME_ID ? null : id);
+                    close();
+                }}
                 label={findTime(activeTimeId).value}
-                list={TIMES}
+                list={showClearOption ? TIMES : TIMES.filter(time => time.id !== NOT_SELECTED_TIME_ID)}
                 activeListItemId={activeTimeId}
+                triggerClassName={triggerClassName}
+                dropdownClassName={dropdownClassName}
+                invalid={Boolean(error)}
+                describedBy={error ? `${id}-error` : undefined}
             />
         </Field>
 

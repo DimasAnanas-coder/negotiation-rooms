@@ -15,6 +15,8 @@ interface InputWrapperArgs {
     triggerClassName?: string;
     dropdownClassName?: string;
     dropdownAlign?: 'left' | 'right';
+    invalid?: boolean;
+    describedBy?: string;
     children: ReactNode;
 };
 
@@ -31,6 +33,8 @@ export default function InputWrapper({
     triggerClassName = '',
     dropdownClassName = '',
     dropdownAlign = 'left',
+    invalid = false,
+    describedBy,
     children,
 }: InputWrapperArgs) {
     const { openId, toggle, close } = useDropdown();
@@ -55,6 +59,7 @@ export default function InputWrapper({
         isBorder ? '' : '!border-0',
         isInline ? '!px-0 !py-0' : '',
         triggerClassName,
+        invalid ? 'border-error! focus-visible:outline-error' : '',
     ].filter(Boolean).join(' ');
     const dropdownAlignClassName = dropdownAlign === 'right' ? 'right-0' : 'left-0';
 
@@ -67,6 +72,8 @@ export default function InputWrapper({
                 disabled={!isActive}
                 title={!isActive ? inactiveMessage : undefined}
                 weight="normal"
+                aria-invalid={invalid || undefined}
+                aria-describedby={describedBy}
             >
                 {...intoButton}
             </Button>

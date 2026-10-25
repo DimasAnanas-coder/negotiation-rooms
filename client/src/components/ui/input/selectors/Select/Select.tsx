@@ -13,7 +13,11 @@ interface SelectArgs<T extends ListItemId = number> {
     activeListItemId: T;
     label?: string;
     isBorder?: boolean;
-    isInline?: boolean
+    isInline?: boolean;
+    triggerClassName?: string;
+    dropdownClassName?: string;
+    invalid?: boolean;
+    describedBy?: string;
     list: Array<ListItem<T>>;
 }
 
@@ -27,6 +31,10 @@ export default function Select<T extends ListItemId>({
     isBorder,
     isInline,
     list,
+    triggerClassName,
+    dropdownClassName,
+    invalid,
+    describedBy,
 }: SelectArgs<T>) {
     return (
         <InputWrapper
@@ -38,6 +46,10 @@ export default function Select<T extends ListItemId>({
             isActive={list.length > 0}
             inactiveMessage="Нет доступных вариантов"
             label={label || activeListItemId.toString()}
+            triggerClassName={triggerClassName}
+            dropdownClassName={dropdownClassName}
+            invalid={invalid}
+            describedBy={describedBy}
         >
             <div className="flex flex-col gap-1 p-2">
                 {list.map((listItem: ListItem<T>): ReactNode => {
