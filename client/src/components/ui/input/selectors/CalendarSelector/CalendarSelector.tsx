@@ -23,9 +23,15 @@ interface CalendarSelectorProps {
     value: Date | null;
     onChange: (value: Date | null) => void;
     showClearOption?: boolean;
+    dropdownAlign?: 'left' | 'right';
 }
 
-export default function CalendarSelector({ value, onChange, showClearOption = true }: CalendarSelectorProps) {
+export default function CalendarSelector({
+    value,
+    onChange,
+    showClearOption = true,
+    dropdownAlign = 'left',
+}: CalendarSelectorProps) {
     const today = startOfDay(new Date());
     const maximumDate = addDays(today, MAX_DAYS_AHEAD);
     const selectedDateId = value?.getTime() ?? NOT_SELECTED_DATE_ID;
@@ -55,6 +61,7 @@ export default function CalendarSelector({ value, onChange, showClearOption = tr
                 label={value ? formatSelectedDate(value) : 'Выберите дату'}
                 triggerClassName="!h-11 !w-42 !justify-start !rounded-lg !px-3.5 !py-0"
                 dropdownClassName="!w-[312px] p-4 shadow-xl"
+                dropdownAlign={dropdownAlign}
             >
                 <div aria-label="Выбор даты">
                     <div className="mb-3 flex items-center justify-between">

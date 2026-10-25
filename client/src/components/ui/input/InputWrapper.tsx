@@ -14,6 +14,7 @@ interface InputWrapperArgs {
     inactiveMessage?: string;
     triggerClassName?: string;
     dropdownClassName?: string;
+    dropdownAlign?: 'left' | 'right';
     children: ReactNode;
 };
 
@@ -29,12 +30,13 @@ export default function InputWrapper({
     inactiveMessage,
     triggerClassName = '',
     dropdownClassName = '',
+    dropdownAlign = 'left',
     children,
 }: InputWrapperArgs) {
     const { openId, toggle, close } = useDropdown();
     const isOpen = openId === id;
 
-    const inlineButtonSettings = isInline ? "font-bold text-lg" : "text-sm";
+    const inlineButtonSettings = isInline ? 'font-bold text-lg' : 'text-sm';
     const intoButton = [
         leftIcon && <img src={leftIcon} className="w-4 h-4" />,
         isDropdown
@@ -54,6 +56,7 @@ export default function InputWrapper({
         isInline ? '!px-0 !py-0' : '',
         triggerClassName,
     ].filter(Boolean).join(' ');
+    const dropdownAlignClassName = dropdownAlign === 'right' ? 'right-0' : 'left-0';
 
     return (
         <div className="flex flex-col relative">
@@ -75,7 +78,7 @@ export default function InputWrapper({
                                 className="fixed inset-0 z-20"
                                 onClick={close}
                             />
-                            <div className={`border border-primary-border absolute top-full mt-1.5 z-40 rounded-xl min-w-max bg-primary-bg ${dropdownClassName}`}>
+                            <div className={`border border-primary-border absolute top-full mt-1.5 z-40 rounded-xl min-w-max bg-primary-bg ${dropdownAlignClassName} ${dropdownClassName}`}>
                                 {children}
                             </div>
                         </>

@@ -78,6 +78,7 @@ export default function Schedule(props: ScheduleProps) {
                     value={calendarDate}
                     onChange={setSelectedDate}
                     showClearOption={false}
+                    dropdownAlign="right"
                 />
             </header>
 
