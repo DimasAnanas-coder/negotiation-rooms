@@ -14,10 +14,8 @@ interface BookingFormProps {
 
 export default function BookingForm({ form, onClose }: BookingFormProps) {
     const id = useId();
-    const {
-        title, setTitle, date, setDate, time, setTime, duration, setDuration,
-        comment, setComment, saving, error, fieldErrors, submit,
-    } = form;
+    const { values, setFieldValue, saving, error, fieldErrors, submit } = form;
+    const { title, date, time, duration, comment } = values;
     const inputClass = 'mt-2 w-full rounded-lg border border-primary-border bg-primary-bg px-4 py-3 text-sm font-normal text-title placeholder:text-disabled focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent';
     const errorClass = 'border-error! focus:border-error! focus:ring-error!';
     const selectorClass = '!h-11 !w-full !justify-between !rounded-lg !px-4 !py-0';
@@ -26,7 +24,7 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
     const calendarDate = date ? new Date(year, month - 1, day) : null;
     const selectDate = (value: Date | null) => {
         if (!value) return;
-        setDate(`${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`);
+        setFieldValue('date', `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`);
     };
     const [hours, minutes] = time.split(':').map(Number);
     const endMinutes = hours * 60 + minutes + duration;
@@ -44,7 +42,7 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
                         placeholder="Укажите тему встречи"
                         maxLength={200}
                         value={title}
-                        onChange={e => setTitle(e.target.value)}
+                        onChange={e => setFieldValue('title', e.target.value)}
                         aria-invalid={Boolean(fieldErrors.title) || undefined}
                         aria-describedby={fieldErrors.title ? `${id}-subject-error` : undefined}
                         className={`${inputClass} ${fieldErrors.title ? errorClass : ''}`}
@@ -65,10 +63,10 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
                     <label className={labelClass}>
                         Время начала
                         <div className="relative mt-1.5">
-                            <img 
-                                src={ClockIcon} 
-                                alt="" 
-                                className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2" 
+                            <img
+                                src={ClockIcon}
+                                alt=""
+                                className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2"
                             />
                             <input
                                 type="time"
@@ -79,7 +77,7 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
                                 aria-invalid={Boolean(fieldErrors.time) || undefined}
                                 aria-describedby={fieldErrors.time ? `${id}-time-error` : undefined}
                                 value={time}
-                                onChange={e => setTime(e.target.value)}
+                                onChange={e => setFieldValue('time', e.target.value)}
                                 className={`${inputClass} mt-0! h-11 pl-11 [&::-webkit-calendar-picker-indicator]:hidden ${fieldErrors.time ? errorClass : ''}`}
                             />
                         </div>
@@ -90,7 +88,7 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
                     label="Продолжительность"
                     error={fieldErrors.duration}
                     value={duration}
-                    onChange={value => value !== null && setDuration(value)}
+                    onChange={value => value !== null && setFieldValue('duration', value)}
                     showClearOption={false}
                     labelClassName={labelClass}
                     triggerClassName={selectorClass}
@@ -98,15 +96,15 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
                 />
                 <label className={labelClass}>
                     Комментарий
-                    <textarea 
-                        placeholder="Дополнительная информация для участников встречи…" 
-                        maxLength={2000} 
-                        rows={3} 
-                        value={comment} 
-                        onChange={e => setComment(e.target.value)} 
-                        aria-invalid={Boolean(fieldErrors.comment) || undefined} 
-                        aria-describedby={fieldErrors.comment ? `${id}-comment-error` : undefined} 
-                        className={`${inputClass} min-h-20 resize-y ${fieldErrors.comment ? errorClass : ''}`} 
+                    <textarea
+                        placeholder="Дополнительная информация для участников встречи…"
+                        maxLength={2000}
+                        rows={3}
+                        value={comment}
+                        onChange={e => setFieldValue('comment', e.target.value)}
+                        aria-invalid={Boolean(fieldErrors.comment) || undefined}
+                        aria-describedby={fieldErrors.comment ? `${id}-comment-error` : undefined}
+                        className={`${inputClass} min-h-20 resize-y ${fieldErrors.comment ? errorClass : ''}`}
                     />
                     <div className="mt-1.5"><FieldError id={`${id}-comment-error`} message={fieldErrors.comment} /></div>
                 </label>

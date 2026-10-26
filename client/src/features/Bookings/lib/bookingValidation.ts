@@ -1,4 +1,5 @@
 import { isAxiosError } from 'axios';
+import type { FormFieldErrors, FormValidation } from '../../../hooks/useForm';
 import { BookingIntervalError, getOfficeBookingInterval, type UtcInterval } from '../../../utils/officeTime';
 
 export interface BookingValues {
@@ -10,9 +11,9 @@ export interface BookingValues {
 }
 
 export type BookingField = keyof BookingValues;
-export type BookingFieldErrors = Partial<Record<BookingField, string>>;
+export type BookingFieldErrors = FormFieldErrors<BookingValues>;
 
-export function validateBooking(values: BookingValues, timezone: string) {
+export function validateBooking(values: BookingValues, timezone: string): FormValidation<BookingValues, UtcInterval> {
     const fieldErrors: BookingFieldErrors = {};
     let interval: UtcInterval | null = null;
 
@@ -28,7 +29,8 @@ export function validateBooking(values: BookingValues, timezone: string) {
         fieldErrors[error.field] = error.message;
     }
 
-    return { fieldErrors, interval };
+    if (Object.keys(fieldErrors).length || !interval) return { valid: false, fieldErrors };
+    return { valid: true, data: interval };
 }
 
 interface BookingErrorResponse {
