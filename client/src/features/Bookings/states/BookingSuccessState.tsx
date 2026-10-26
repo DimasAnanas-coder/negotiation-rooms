@@ -5,14 +5,10 @@ import { BaseState, IconCircle } from '../../../components/outlets/states';
 interface BookingSuccessStateProps {
     titleId: string;
     roomName: string;
-    title: string;
-    date: string;
-    time: string;
-    duration: number;
     onClose: () => void;
 }
 
-export default function BookingSuccessState({ titleId, roomName, title, date, time, duration, onClose }: BookingSuccessStateProps) {
+export default function BookingSuccessState({ titleId, roomName, onClose }: BookingSuccessStateProps) {
     return (
         <div aria-live="polite">
             <BaseState

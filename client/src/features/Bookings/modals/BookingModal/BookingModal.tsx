@@ -29,10 +29,6 @@ export default function BookingModal({ onClose, ...bookingOptions }: BookingModa
                             <BookingSuccessState
                                 titleId={titleId}
                                 roomName={room.name}
-                                title={form.title}
-                                date={form.date}
-                                time={form.time}
-                                duration={form.duration}
                                 onClose={close}
                             />
                         )
