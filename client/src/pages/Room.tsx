@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import Container from '../components/ui/Container';
-import Schedule from '../features/Rooms/outlets/Schedule';
-import BreadCrumbs from '../features/Rooms/layouts/BreadCrumbs';
-import RoomDetail from '../features/Rooms/layouts/RoomDetail';
+import Schedule from '../features/Bookings/outlets/Schedule';
+import BreadCrumbs from '../features/Bookings/layout/BreadCrumbs';
+import RoomDetail from '../features/Bookings/layout/RoomDetail';
 import { useRoom } from '../hooks';
 
 export default function Room() {

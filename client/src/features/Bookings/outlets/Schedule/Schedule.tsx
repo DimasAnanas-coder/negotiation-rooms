@@ -3,7 +3,7 @@ import CalendarSelector from '../../../../components/ui/input/selectors/Calendar
 import { useCurrentUser, useRoomBookings } from '../../../../hooks';
 import { formatOfficeTime, getOfficeWorkdayRange } from '../../../../utils/officeTime';
 import ScheduleSkeleton from './ScheduleSkeleton';
-import BookingButton from '../../../Bookings/components/BookingButton';
+import BookingButton from '../../components/BookingButton';
 import type { Room } from '../../../../types/Rooms';
 
 const WORKDAY_DURATION_MINUTES = 11 * 60;
