@@ -65,7 +65,11 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
                     <label className={labelClass}>
                         Время начала
                         <div className="relative mt-1.5">
-                            <img src={ClockIcon} alt="" className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2" />
+                            <img 
+                                src={ClockIcon} 
+                                alt="" 
+                                className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2" 
+                            />
                             <input
                                 type="time"
                                 required
@@ -94,7 +98,16 @@ export default function BookingForm({ form, onClose }: BookingFormProps) {
                 />
                 <label className={labelClass}>
                     Комментарий
-                    <textarea placeholder="Дополнительная информация для участников встречи…" maxLength={2000} rows={3} value={comment} onChange={e => setComment(e.target.value)} aria-invalid={Boolean(fieldErrors.comment) || undefined} aria-describedby={fieldErrors.comment ? `${id}-comment-error` : undefined} className={`${inputClass} min-h-20 resize-y ${fieldErrors.comment ? errorClass : ''}`} />
+                    <textarea 
+                        placeholder="Дополнительная информация для участников встречи…" 
+                        maxLength={2000} 
+                        rows={3} 
+                        value={comment} 
+                        onChange={e => setComment(e.target.value)} 
+                        aria-invalid={Boolean(fieldErrors.comment) || undefined} 
+                        aria-describedby={fieldErrors.comment ? `${id}-comment-error` : undefined} 
+                        className={`${inputClass} min-h-20 resize-y ${fieldErrors.comment ? errorClass : ''}`} 
+                    />
                     <div className="mt-1.5"><FieldError id={`${id}-comment-error`} message={fieldErrors.comment} /></div>
                 </label>
             </fieldset>
