@@ -22,6 +22,7 @@ const NOT_SELECTED_DATE_ID = 0;
 interface CalendarSelectorProps {
     value: Date | null;
     onChange: (value: Date | null) => void;
+    disablePastDates?: boolean;
     showClearOption?: boolean;
     dropdownAlign?: 'left' | 'right';
     label?: string;
@@ -34,6 +35,7 @@ interface CalendarSelectorProps {
 export default function CalendarSelector({
     value,
     onChange,
+    disablePastDates = true,
     showClearOption = true,
     dropdownAlign = 'left',
     label = 'ДАТА',
@@ -123,9 +125,10 @@ export default function CalendarSelector({
                     <div className="grid grid-cols-7 justify-items-center gap-y-1">
                         {days.map((date) => {
                             const isCurrentMonth = date.getMonth() === visibleMonth.getMonth();
+                            const isBeforeToday = date.getTime() < today.getTime();
                             const isBeyondLimit = date.getTime() > maximumDate.getTime();
                             const isSelected = selectedDateId === date.getTime();
-                            const isDisabled = !isCurrentMonth || isBeyondLimit;
+                            const isDisabled = !isCurrentMonth || (disablePastDates && isBeforeToday) || isBeyondLimit;
 
                             return (
                                 <Button
@@ -146,6 +149,7 @@ export default function CalendarSelector({
                     </div>
 
                     <p className="mt-3 text-xs leading-5 text-disabled">
+                        {disablePastDates && <>Прошедшие даты недоступны.<br /></>}
                         Ограничение: не более 30 дней вперёд.<br />
                         Даты за пределами лимита неактивны.
                     </p>
