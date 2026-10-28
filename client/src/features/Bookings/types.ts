@@ -6,3 +6,5 @@ export interface BookingOptions {
     timezone: string;
     interval?: UtcInterval | null;
 }
+
+export type BookingPeriod = 'all' | 'month' | 'week';
