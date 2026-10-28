@@ -169,4 +169,17 @@ describe('BookingForm', () => {
         expect(await screen.findByText('Не удалось создать бронирование. Попробуйте ещё раз.'))
             .toBeInTheDocument();
     });
+
+    it('сохраняет тему встречи после ошибки запроса', async () => {
+        vi.mocked(createBooking).mockRejectedValue(new Error('Network error'));
+        render(<BookingFormHarness />);
+
+        const title = screen.getByPlaceholderText('Укажите тему встречи');
+        fireEvent.change(title, { target: { value: 'Планирование' } });
+        fireEvent.click(screen.getByRole('button', { name: 'Забронировать' }));
+
+        expect(await screen.findByText('Не удалось создать бронирование. Попробуйте ещё раз.'))
+            .toBeInTheDocument();
+        expect(title).toHaveValue('Планирование');
+    });
 });
