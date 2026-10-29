@@ -22,3 +22,6 @@ client/*.ntvs*
 client/*.njsproj
 client/*.sln
 client/*.sw?
+
+# Local frontend environment values
+client/.env

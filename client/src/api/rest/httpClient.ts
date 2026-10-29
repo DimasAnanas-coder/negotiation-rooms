@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { config } from '../../config';
 
 const httpClient = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000/api/v1',
+    baseURL: config.apiUrl,
 });
 
 export default httpClient;

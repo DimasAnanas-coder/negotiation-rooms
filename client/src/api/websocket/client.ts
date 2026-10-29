@@ -1,19 +1,8 @@
+import { config } from '../../config';
 import { isRealtimeEvent, type RealtimeEvent } from './events';
 
-function getWebSocketUrl(): string {
-    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000/api/v1';
-    const url = new URL(apiBaseUrl);
-
-    url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
-    url.pathname = `${url.pathname.replace(/\/$/, '')}/ws`;
-    url.search = '';
-    url.hash = '';
-
-    return url.toString();
-}
-
 export function connectWebSocket(onEvent: (event: RealtimeEvent) => void): () => void {
-    const socket = new WebSocket(getWebSocketUrl());
+    const socket = new WebSocket(config.websocketUrl);
 
     socket.addEventListener('message', (message: MessageEvent<unknown>) => {
         if (typeof message.data !== 'string') return;

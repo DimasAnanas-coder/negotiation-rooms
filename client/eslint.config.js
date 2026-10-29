@@ -24,6 +24,12 @@ export default defineConfig([
     ],
     rules: {
       '@stylistic/jsx-one-expression-per-line': 'off',
+      'no-restricted-imports': ['error', {
+        patterns: [{
+          group: ['**/config/env'],
+          message: 'Import computed values from config/index instead of raw env.',
+        }],
+      }],
     },
     plugins: {
       '@stylistic': stylistic,
@@ -31,5 +37,9 @@ export default defineConfig([
     languageOptions: {
       globals: globals.browser,
     },
+  },
+  {
+    files: ['src/config/index.ts'],
+    rules: { 'no-restricted-imports': 'off' },
   },
 ])

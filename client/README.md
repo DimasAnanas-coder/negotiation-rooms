@@ -21,12 +21,13 @@ npm ci
 npm run dev
 ```
 
-Vite выведет адрес приложения в терминал. По умолчанию клиент отправляет запросы на `http://localhost:3000/api/v1`. Чтобы указать другой адрес API в PowerShell:
+Vite выведет адрес приложения в терминал. Настройки клиента хранятся в `client/.env`. Создайте его из примера:
 
 ```powershell
-$env:VITE_API_BASE_URL = "http://localhost:3000/api/v1"
-npm run dev
+Copy-Item .env.example .env
 ```
+
+В `VITE_API_BASE_URL` указывается адрес REST API. WebSocket URL вычисляется из него автоматически (`http` → `ws`, `https` → `wss`, путь `/ws`). После изменения .env перезапустите Vite.
 
 ## Команды
 
@@ -42,7 +43,9 @@ npm run dev
 
 ```text
 src/
-  api/                  HTTP-клиент и функции запросов к backend
+  api/rest/             HTTP-клиент и функции REST-запросов
+  api/websocket/        Подключение и типы WebSocket-событий
+  config/               Настройки окружения и преобразование URL
   assets/icons/         SVG-иконки
   components/
     layout/             Общая оболочка, шапка, навигация и профиль
