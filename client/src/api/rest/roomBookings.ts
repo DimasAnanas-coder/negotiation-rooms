@@ -1,5 +1,5 @@
 import httpClient from './httpClient';
-import type { RoomBooking } from '../types/Booking';
+import type { RoomBooking } from '../../types/Booking';
 
 interface RoomBookingsResponse {
     items: RoomBooking[];

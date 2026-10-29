@@ -1,6 +1,6 @@
 import httpClient from './httpClient';
-import type { Room } from '../types/Rooms';
-import type { Office } from '../types/Office';
+import type { Room } from '../../types/Rooms';
+import type { Office } from '../../types/Office';
 
 interface RoomsResponse {
     items: Room[];

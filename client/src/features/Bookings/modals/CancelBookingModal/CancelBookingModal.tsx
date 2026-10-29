@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { cancelBooking } from '../../../../api/bookings';
+import { cancelBooking } from '../../../../api/rest/bookings';
 import type { Booking } from '../../../../types/Booking';
 import { BaseModal, ModalHeader } from '../../../../components/ui/modals';
 import Button from '../../../../components/ui/Button';

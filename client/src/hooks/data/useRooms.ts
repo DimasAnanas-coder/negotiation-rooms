@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
-import { getRooms, type RoomsQuery } from '../api/rooms';
-import type { Room } from '../types/Rooms';
+import { getRooms, type RoomsQuery } from '../../api/rest/rooms';
+import type { Room } from '../../types/Rooms';
 import useApi from './useApi';
 
 const EMPTY_ROOMS: Room[] = [];

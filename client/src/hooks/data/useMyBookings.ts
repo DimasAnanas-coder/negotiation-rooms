@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { getBookings } from '../../../api/bookings';
-import type { Booking, BookingScope } from '../../../types/Booking';
-import useApi from '../../../hooks/useApi';
+import { getBookings } from '../../api/rest/bookings';
+import type { Booking, BookingScope } from '../../types/Booking';
+import useApi from './useApi';
 
 const EMPTY_BOOKINGS: Booking[] = [];
 

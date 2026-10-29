@@ -1,6 +1,6 @@
 import { useMemo, type ReactNode } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import type { RoomsQuery } from '../api/rooms';
+import type { RoomsQuery } from '../api/rest/rooms';
 import FilterBar from '../features/Rooms/layout/FilterBar';
 import OfficeSelector from '../features/Rooms/layout/OfficeSelector';
 import RoomsGrid from '../features/Rooms/outlets/roomsGrid';

@@ -1,5 +1,5 @@
-import { getOffices } from '../api/offices';
-import type { Office } from '../types/Office';
+import { getOffices } from '../../api/rest/offices';
+import type { Office } from '../../types/Office';
 import useApi from './useApi';
 
 const EMPTY_OFFICES: Office[] = [];

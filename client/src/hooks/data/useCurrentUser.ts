@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { getCurrentUser } from '../api/user';
-import type { User } from '../types/User';
+import { getCurrentUser } from '../../api/rest/user';
+import type { User } from '../../types/User';
 import useApi from './useApi';
 
 export default function useCurrentUser() {

@@ -1,6 +1,6 @@
 import httpClient from './httpClient';
-import type { RoomBooking } from '../types/Booking';
-import type { Booking, BookingScope } from '../types/Booking';
+import type { RoomBooking } from '../../types/Booking';
+import type { Booking, BookingScope } from '../../types/Booking';
 
 export interface CreateBooking {
     roomId: string;

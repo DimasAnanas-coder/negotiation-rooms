@@ -1,10 +1,10 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
-import { cancelBooking } from '../../../../api/bookings';
+import { cancelBooking } from '../../../../api/rest/bookings';
 import type { Booking } from '../../../../types/Booking';
 import CancelBookingModal from './CancelBookingModal';
 
-vi.mock('../../../../api/bookings', () => ({ cancelBooking: vi.fn() }));
+vi.mock('../../../../api/rest/bookings', () => ({ cancelBooking: vi.fn() }));
 vi.mock('../../../../components/ui/modals', () => ({
     BaseModal: ({ children }: { children: React.ReactNode }) => <div role="dialog">{children}</div>,
     ModalHeader: ({ title }: { title: string }) => <h2>{title}</h2>,

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { RequestStatus } from '../types/RequestStatus';
+import type { RequestStatus } from '../../types/RequestStatus';
 
 interface UseApiResult<T> {
     data: T;

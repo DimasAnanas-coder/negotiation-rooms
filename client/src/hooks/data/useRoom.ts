@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { getRoom } from '../api/rooms';
-import type { RoomDetails } from '../api/rooms';
+import { getRoom } from '../../api/rest/rooms';
+import type { RoomDetails } from '../../api/rest/rooms';
 import useApi from './useApi';
 
 export default function useRoom(roomId: string | undefined) {

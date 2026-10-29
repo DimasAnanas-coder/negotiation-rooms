@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import { createBooking } from '../../../../api/bookings';
+import { createBooking } from '../../../../api/rest/bookings';
 import type { Room } from '../../../../types/Rooms';
 import { getOfficeBookingInterval } from '../../../../utils/officeTime';
 import useBookingForm from '../../hooks/useBookingForm';
 import BookingForm from './BookingForm';
 
-vi.mock('../../../../api/bookings', () => ({
+vi.mock('../../../../api/rest/bookings', () => ({
     createBooking: vi.fn(),
 }));
 

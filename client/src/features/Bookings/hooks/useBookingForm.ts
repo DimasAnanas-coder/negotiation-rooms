@@ -1,4 +1,4 @@
-import { createBooking } from '../../../api/bookings';
+import { createBooking } from '../../../api/rest/bookings';
 import useForm from '../../../hooks/useForm';
 import { formatOfficeTime } from '../../../utils/officeTime';
 import type { BookingOptions } from '../types';
