@@ -29,7 +29,10 @@ describe('CancelBookingModal', () => {
 
         await waitFor(() => expect(cancelBooking).toHaveBeenCalledWith('booking-1'));
         expect(onClose).toHaveBeenCalledOnce();
-        expect(dispatchSpy).toHaveBeenCalledWith(expect.objectContaining({ type: 'bookings-changed' }));
+        expect(dispatchSpy).toHaveBeenCalledWith(expect.objectContaining({
+            type: 'data-invalidated',
+            detail: { resource: 'my-bookings' },
+        }));
         dispatchSpy.mockRestore();
     });
 

@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { getRooms, type RoomsQuery } from '../../api/rest/rooms';
 import type { Room } from '../../types/Rooms';
 import useApi from './useApi';
+import { useDataInvalidation } from '../realtime/useDataInvalidation';
 
 const EMPTY_ROOMS: Room[] = [];
 
@@ -18,10 +19,7 @@ export default function useRooms(officeId: string | null, query: RoomsQuery = {}
         EMPTY_ROOMS,
     );
 
-    useEffect(() => {
-        window.addEventListener('bookings-changed', refetch);
-        return () => window.removeEventListener('bookings-changed', refetch);
-    }, [refetch]);
+    useDataInvalidation('rooms', refetch);
 
     return { rooms: data, status, error, refetch };
 }

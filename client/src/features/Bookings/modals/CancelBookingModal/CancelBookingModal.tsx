@@ -3,6 +3,7 @@ import { cancelBooking } from '../../../../api/rest/bookings';
 import type { Booking } from '../../../../types/Booking';
 import { BaseModal, ModalHeader } from '../../../../components/ui/modals';
 import Button from '../../../../components/ui/Button';
+import { invalidateDataResources } from '../../../../hooks/realtime/useDataInvalidation';
 
 export default function CancelBookingModal({
     booking,
@@ -20,7 +21,7 @@ export default function CancelBookingModal({
         setError('');
         try {
             await cancelBooking(booking.id);
-            window.dispatchEvent(new Event('bookings-changed'));
+            invalidateDataResources('rooms', 'room-schedule', 'my-bookings');
             onClose();
         }
         catch {

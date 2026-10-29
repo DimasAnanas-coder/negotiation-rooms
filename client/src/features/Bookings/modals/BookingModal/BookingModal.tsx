@@ -5,6 +5,7 @@ import useBookingForm from '../../hooks/useBookingForm';
 import type { BookingOptions } from '../../types';
 import BookingForm from './BookingForm';
 import { DropdownProvider } from '../../../../context/DropdownContext';
+import { invalidateDataResources } from '../../../../hooks/realtime/useDataInvalidation';
 
 interface BookingModalProps extends BookingOptions {
     onClose: () => void;
@@ -18,7 +19,7 @@ export default function BookingModal({ onClose, ...bookingOptions }: BookingModa
     const close = () => {
         if (form.isPending()) return;
         onClose();
-        if (form.success) window.dispatchEvent(new Event('bookings-changed'));
+        if (form.success) invalidateDataResources('rooms', 'room-schedule', 'my-bookings');
     };
 
     return (

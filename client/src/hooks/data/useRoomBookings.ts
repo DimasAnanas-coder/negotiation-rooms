@@ -1,7 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { getRoomBookings, type RoomBookingsQuery } from '../../api/rest/roomBookings';
 import type { RoomBooking } from '../../types/Booking';
 import useApi from './useApi';
+import { useDataInvalidation } from '../realtime/useDataInvalidation';
 
 const EMPTY_BOOKINGS: RoomBooking[] = [];
 
@@ -22,10 +23,7 @@ export default function useRoomBookings(
         EMPTY_BOOKINGS,
     );
 
-    useEffect(() => {
-        window.addEventListener('bookings-changed', refetch);
-        return () => window.removeEventListener('bookings-changed', refetch);
-    }, [refetch]);
+    useDataInvalidation('room-schedule', refetch);
 
     return {
         bookings: data,
