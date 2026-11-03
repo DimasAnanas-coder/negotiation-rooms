@@ -35,35 +35,33 @@ export default function MyBookings() {
     }, [bookings, period, scope]);
 
     return (
-        <div className="min-h-full bg-secondary-bg py-8">
-            <Container className="mx-auto flex w-full flex-col gap-6 px-6">
-                <MyBookingsLayout
-                    offices={offices}
-                    officeId={officeId}
-                    period={period}
-                    activeScope={scope}
-                    upcomingCount={scope === 'upcoming' ? visibleBookings.length : undefined}
-                    isLoadingOffices={officesStatus === 'loading'}
-                    isLoadingBookings={status === 'loading'}
-                    onOfficeChange={setOfficeId}
-                    onPeriodChange={setPeriod}
-                />
+        <Container className="flex flex-1 mx-auto w-full flex-col gap-6 px-6 py-4 bg-secondary-bg">
+            <MyBookingsLayout
+                offices={offices}
+                officeId={officeId}
+                period={period}
+                activeScope={scope}
+                upcomingCount={scope === 'upcoming' ? visibleBookings.length : undefined}
+                isLoadingOffices={officesStatus === 'loading'}
+                isLoadingBookings={status === 'loading'}
+                onOfficeChange={setOfficeId}
+                onPeriodChange={setPeriod}
+            />
 
-                {status === 'error' && <BookingsErrorState onRetry={refetch} />}
-                {status === 'loaded' && visibleBookings.length === 0 && <BookingsEmptyState scope={scope} />}
-                {(status === 'loading' || visibleBookings.length > 0) && (
-                    <BookingList
-                        bookings={visibleBookings}
-                        status={status}
-                        scope={scope}
-                        onCancel={setBookingToCancel}
-                    />
-                )}
-            </Container>
+            {status === 'error' && <BookingsErrorState onRetry={refetch} />}
+            {status === 'loaded' && visibleBookings.length === 0 && <BookingsEmptyState scope={scope} />}
+            {(status === 'loading' || visibleBookings.length > 0) && (
+                <BookingList
+                    bookings={visibleBookings}
+                    status={status}
+                    scope={scope}
+                    onCancel={setBookingToCancel}
+                />
+            )}
 
             {bookingToCancel && (
                 <CancelBookingModal booking={bookingToCancel} onClose={() => setBookingToCancel(null)} />
             )}
-        </div>
+        </Container>
     );
 }

@@ -1,13 +1,5 @@
-import type { ReactNode } from 'react';
+import type { BaseStateArgs } from "./types";
 
-interface BaseStateArgs {
-    visual?: ReactNode;
-    title: string;
-    titleId?: string;
-    description?: string;
-    children?: ReactNode;
-    layout?: 'content' | 'page';
-}
 
 export default function BaseState({
     visual,
@@ -15,14 +7,14 @@ export default function BaseState({
     titleId,
     description,
     children,
-    layout = 'content',
+    layout = 'page',
 }: BaseStateArgs) {
     const layoutClassName = layout === 'page'
-        ? 'min-h-full justify-center bg-secondary-bg px-6 py-[120px]'
-        : 'mt-20 h-full';
+        ? 'bg-secondary-bg'
+        : 'bg-primary-bg border border-disabled-bg rounded-lg p-6';
 
     return (
-        <div className={`flex w-full flex-col items-center gap-6 ${layoutClassName}`}>
+        <div className={`flex flex-1 w-full flex-col items-center justify-center gap-6 ${layoutClassName}`}>
             {visual}
             <div className="flex gap-3 flex-col items-center">
                 <p id={titleId} className="text-title font-extrabold text-xl">
