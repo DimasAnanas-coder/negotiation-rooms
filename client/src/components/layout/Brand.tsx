@@ -8,9 +8,9 @@ export default function Brand() {
             <img
                 src={Logo}
                 alt="Negotiation Rooms Logo"
-                className="w-9 h-9"
+                className="w-9 h-9 shrink-0"
             />
-            <h1 className="text-title text-[20px] ml-2 text-center font-extrabold">{ServiceName}</h1>
+            <h1 className="text-title text-[20px] ml-2 text-center font-extrabold hidden md:block">{ServiceName}</h1>
         </div>
     );
 }
