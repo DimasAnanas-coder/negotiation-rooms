@@ -13,7 +13,7 @@ const routes: NavRoutes = [
 
 export default function Header() {
     return (
-        <header className="flex min-h-18 items-center border-b border-primary-border">
+        <header className="flex min-h-18 items-center border-b border-primary-border fixed top-0 bg-primary-bg w-full h-18 z-50">
             <Container className="w-full h-full">
                 <div className="flex justify-between items-center h-full gap-2">
                     <Brand />

@@ -5,7 +5,7 @@ export default function NavLink({ to, children }: { to: string; children: React.
     const isActive = location.pathname === to || location.pathname.startsWith(`${to}/`);
 
     return (
-        <Link to={to} className={`flex items-center ${isActive ? 'text-accent border-b-2 border-accent-border' : ''}`}>
+        <Link to={to} className={`flex items-center h-full ${isActive ? 'text-accent border-b-2 border-accent-border' : ''}`}>
             {children}
         </Link>
     );
