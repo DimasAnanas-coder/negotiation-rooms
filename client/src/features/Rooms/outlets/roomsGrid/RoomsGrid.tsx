@@ -25,13 +25,13 @@ export default function RoomsGrid({
         : rooms;
 
     return (
-        <Container className="flex flex-col bg-secondary-bg px-10 py-4 gap-4">
+        <Container className="flex flex-col bg-secondary-bg py-4 gap-4">
             <p className="text-[22px] font-extrabold text-title">
                 {status === 'loading'
                     ? 'Загрузка переговорных…'
                     : 'Доступные переговорные в этом офисе'}
             </p>
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
                 {visibleRooms.map((room, index) => (
                     <RoomCard
                         key={room?.id ?? `skeleton-${index}`}

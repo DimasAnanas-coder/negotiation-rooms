@@ -10,7 +10,7 @@ interface FilterBarProps {
 
 export default function FilterBar({ filters, onChange }: FilterBarProps) {
     return (
-        <Container className="flex flex-rows border-b border-primary-border py-4 gap-4">
+        <Container className="grid grid-cols-2 md:flex md:flex-row border-b border-primary-border py-4 gap-4">
             <CalendarSelector
                 value={filters.date}
                 onChange={(date) => onChange({ ...filters, date })}
