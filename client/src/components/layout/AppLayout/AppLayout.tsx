@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import Header from './Header';
-import { useRealtimeUpdates } from '../../hooks/realtime/useRealtimeUpdates';
+import Header from './Header/Header';
+import { useRealtimeUpdates } from '../../../hooks/realtime/useRealtimeUpdates';
 
 export default function AppLayout() {
     useRealtimeUpdates();

@@ -1,4 +1,4 @@
-import Logo from '../../assets/icons/logo-badge.svg';
+import Logo from '../../../../assets/icons/logo-badge.svg';
 
 const ServiceName = 'BookRoom';
 

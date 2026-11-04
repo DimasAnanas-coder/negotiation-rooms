@@ -1,5 +1,5 @@
 import { Navigate, type RouteObject } from 'react-router-dom';
-import AppLayout from './components/layout/AppLayout';
+import AppLayout from './components/layout/AppLayout/AppLayout';
 import Rooms from './pages/Rooms';
 import Room from './pages/Room';
 import MyBookings from './pages/MyBookings';
