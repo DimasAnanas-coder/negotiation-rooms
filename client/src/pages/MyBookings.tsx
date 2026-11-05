@@ -35,7 +35,7 @@ export default function MyBookings() {
     }, [bookings, period, scope]);
 
     return (
-        <Container className="flex flex-1 mx-auto w-full flex-col gap-6 px-6 py-4 bg-secondary-bg">
+        <Container className="flex flex-1 mx-auto w-full flex-col gap-6 py-4 bg-secondary-bg">
             <MyBookingsLayout
                 offices={offices}
                 officeId={officeId}
