@@ -30,7 +30,7 @@ export default function MyBookingsLayout({
     return (
         <div className="flex flex-col gap-6">
             <header className="flex flex-wrap items-center justify-between gap-4">
-                <h1 className="text-2xl font-bold text-title">Мои бронирования</h1>
+                <h1 className="text-[20px] font-bold text-title">Мои бронирования</h1>
                 <BookingFilter
                     offices={offices}
                     officeId={officeId}
